@@ -2,7 +2,7 @@
 <b>General Information</b><br>
 Auto-CHO is a free-to-use software developed by Academia Sinica for providing glycan synthetic solutions by one-pot approach. The software and user guide can be accessed from https://sites.google.com/view/auto-cho/home. After downloading, the user can unzip it and double click “Auto-CHO.jar” to start the program (For macOS, the user may need to right-click “Auto-CHO.jar” and choose “Open”). Please see the user guide for more information.
  
-<b>System Requirement</b><br>
+<b>System Requirements</b><br>
 Operating System:<br>
   Microsoft Windows 7 or above (64bit).<br>
   macOS 10.13 or above (64bit).<br>
