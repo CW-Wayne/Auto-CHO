@@ -1,0 +1,442 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="763.0" prefWidth="1138.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AutoCHO.MainFormController">
+  <children>
+    <BorderPane prefHeight="763.0" prefWidth="1138.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <center>
+        <SplitPane dividerPositions="0.676056338028169" focusTraversable="true" prefHeight="741.0" prefWidth="1138.0" styleClass="mainFxmlClass" BorderPane.alignment="CENTER">
+          <items>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+              <children>
+                <SplitPane fx:id="ResultPane" dividerPositions="0.4966078697421981" focusTraversable="true" orientation="VERTICAL" prefHeight="376.0" prefWidth="296.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <items>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="183.9998779296875" prefWidth="293.9998779296875">
+                      <children>
+                        <BorderPane prefHeight="321.0" prefWidth="479.0" style="-fx-background-color: #ffffff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+<center><TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+  <tabs>
+    <Tab closable="false" styleClass=".tab" text="Query Structure">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+<children><BorderPane layoutX="88.0" layoutY="75.0" prefHeight="295.0" prefWidth="618.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+<center>
+                            <ImageView id="imgTargetStruct" fx:id="ImageTargetStructure" fitHeight="268.0" fitWidth="440.0" layoutX="90.0" layoutY="-8.0" onMousePressed="#EnableGlycanBuilder" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                                                                     <image>
+                                                                        <Image url="@image/DefaultTarget.png" />
+                                                                     </image></ImageView>
+</center>
+<top>
+                            <ToolBar BorderPane.alignment="CENTER">
+                              <items>
+                                <Button fx:id="FXButton_Edit" mnemonicParsing="false" onAction="#EnableGlycanBuilder" text="Edit Glycan by GlycanBuilder">
+<font>
+<Font size="14.0" />
+</font>
+                                                                        </Button>
+                                <Button fx:id="FXButton_Search" disable="true" mnemonicParsing="false" onAction="#StartSearch" text="Search Building Block Library" textFill="RED">
+<font>
+<Font name="System Bold" size="14.0" />
+</font>
+                                                                        </Button>
+                                                                        <Button fx:id="FXButton_GloboH" mnemonicParsing="false" onAction="#DrawGloboH" text="Globo-H">
+<font>
+<Font size="14.0" />
+</font>
+                                                                        </Button>
+                                                                        <Button fx:id="FXButton_SSEA4" mnemonicParsing="false" onAction="#DrawSSEA4" text="SSEA-4">
+<font>
+<Font size="14.0" />
+</font>
+                                                                        </Button>
+                                                                        <Button fx:id="FXButton_OligoLacNAc" mnemonicParsing="false" onAction="#DrawOligoLacNAc" text="OligoLacNAc">
+<font>
+<Font size="14.0" />
+</font>
+                                                                        </Button>
+                              </items>
+                            </ToolBar>
+</top></BorderPane>
+</children></AnchorPane>
+      </content>
+    </Tab>
+    <Tab closable="false" text="Parameter Settings">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+<children><GridPane layoutX="109.0" prefHeight="343.0" prefWidth="750.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="324.0" minWidth="10.0" prefWidth="293.0" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="493.0" minWidth="10.0" prefWidth="397.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+<children><Label text="Threshold of High Class RRV" /><Label text="Threshold of Medium Class RRV" GridPane.rowIndex="1" /><Label text="Max Fragment Number" GridPane.rowIndex="2" /><Label text="Min Fragment Yield" visible="false" GridPane.rowIndex="9" /><Label text="Min BBL Number in a Fragment" GridPane.rowIndex="3" /><Label text="Max BBL Number in a Fragment" GridPane.rowIndex="4" /><Label text="Min Donor/Acceptor RRV Difference" GridPane.rowIndex="5" /><Label text="Min Donor/Acceptor RRV Ratio" GridPane.rowIndex="6" /><Label text="Max Donor/Acceptor RRV Ratio" GridPane.rowIndex="7" /><TextField fx:id="FX_MinBBLNumOfEachFrag" GridPane.columnIndex="1" GridPane.rowIndex="3" /><TextField fx:id="FX_MaxBBLNumOfEachFrag" GridPane.columnIndex="1" GridPane.rowIndex="4" /><TextField fx:id="FX_MinDonorAcceptorRRVDiff" GridPane.columnIndex="1" GridPane.rowIndex="5" /><TextField fx:id="FX_MinDonorAcceptorRRVRatio" GridPane.columnIndex="1" GridPane.rowIndex="6" /><TextField fx:id="FX_MaxDonorAcceptorRRVRatio" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                                                                  <TextField fx:id="FX_MinFragYield" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                                                                  <TextField fx:id="FX_MaxFragNum" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                                  <TextField fx:id="FX_RRV_THR_Medium" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                                  <TextField fx:id="FX_RRV_THR_High" GridPane.columnIndex="1" />
+                                                                  <Button mnemonicParsing="false" onAction="#SetSearchParametersByUser" text="OK" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                                                                  <Label text="To Consider Non-STol Leaving Group ?" visible="false" GridPane.rowIndex="10" />
+                                                                  <ToggleButton fx:id="FX_ToggleButton_ConsiderNonSTol" mnemonicParsing="false" onAction="#SetSTolSelection" text="No" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+</children>
+</GridPane>
+</children></AnchorPane>
+      </content>
+    </Tab><Tab closable="false" text="About Auto-CHO">
+  <content>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+<children><BorderPane prefHeight="343.0" prefWidth="710.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+<center><Label text="Auto-CHO was developed by Academia Sinica.&#10;Beta Version&#10;&#10;Reference:&#10;Cheng-Wei Cheng, Yixuan Zhou, Wen-Harn Pan, Supriya Dey, &#10;Chung-Yi Wu, Wen-Lian Hsu, and Chi-Huey Wong, &quot;Hierarchical and &#10;Programmable One-pot Automated Synthesis of Oligosaccharides&quot;, 2018 (Submitted)." BorderPane.alignment="CENTER">
+<font>
+<Font size="16.0" />
+</font></Label>
+</center>
+<bottom><Hyperlink onAction="#OpenAutoCHOWebsite" text="https://sites.google.com/view/auto-cho/home" BorderPane.alignment="CENTER" />
+</bottom></BorderPane>
+</children></AnchorPane>
+  </content>
+</Tab>
+  </tabs>
+</TabPane>
+</center>
+                        </BorderPane>
+                      </children>
+                    </AnchorPane>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+<children><BorderPane layoutX="73.0" layoutY="89.5" prefHeight="379.0" prefWidth="618.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+<center><TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+  <tabs>
+    <Tab fx:id="FXTab_ResultVisualization" disable="true" text="Result Visualization">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+<children><SplitPane cache="true" dividerPositions="0.6222222222222222" focusTraversable="true" layoutX="25.0" prefHeight="350.0" prefWidth="618.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+<items>
+<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+<children>
+<SplitPane dividerPositions="0.6481876332622601" focusTraversable="true" layoutX="42.0" prefHeight="363.0" prefWidth="280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+<items>
+<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="362.0" prefWidth="292.0">
+<children>
+<BorderPane layoutX="37.0" layoutY="103.0" prefHeight="362.0" prefWidth="261.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+<center>
+<TableView id="NodeTable" fx:id="FXTable_ReducingEndNode" prefHeight="361.0" prefWidth="94.0" BorderPane.alignment="CENTER">
+<columns>
+<TableColumn id="" fx:id="TC_ReducingEndNode" editable="false" maxWidth="1.7976931348623157E308" prefWidth="350.0" sortable="false" text="Reducing End Acceptor" />
+</columns>
+</TableView>
+</center>
+</BorderPane>
+</children>
+</AnchorPane>
+<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+<children>
+<BorderPane layoutX="14.0" layoutY="45.0" prefHeight="362.0" prefWidth="151.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+<center>
+<TableView fx:id="FXTable_Solution" prefHeight="361.0" prefWidth="93.0" BorderPane.alignment="CENTER">
+<columns>
+<TableColumn fx:id="TC_Sol_ID" editable="false" prefWidth="90.0" sortable="false" text="Solution" />
+<TableColumn fx:id="TC_Sol_NumOfFrag" editable="false" prefWidth="100.0" text="# of Frag." />
+                                                                                                <TableColumn fx:id="TC_Sol_AvgFragYield" editable="false" prefWidth="150.0" text="Avg. Frag. Yield" />
+</columns>
+</TableView>
+</center>
+</BorderPane>
+</children>
+</AnchorPane>
+</items>
+</SplitPane>
+</children>
+</AnchorPane>
+<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="346.0" prefWidth="325.0">
+<children>
+<SplitPane dividerPositions="0.5" focusTraversable="true" orientation="VERTICAL" prefHeight="363.0" prefWidth="280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+<items>
+<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+<children>
+<TableView fx:id="FXTable_Fragment" prefHeight="177.0" prefWidth="363.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+<columns>
+<TableColumn fx:id="TC_Fragment_Image" editable="false" prefWidth="220.0" sortable="false" text="Fragment" />
+<TableColumn fx:id="TC_Fragment_RRV" editable="false" prefWidth="120.0" sortable="false" text="Frag.'s RRV" />
+<TableColumn id="yield" fx:id="TC_Fragment_Yield" editable="false" sortable="false" text="Yield" />
+<TableColumn fx:id="TC_Fragment_Deprotection" editable="false" prefWidth="120.0" sortable="false" text="Deprotection" />
+</columns>
+</TableView>
+</children>
+</AnchorPane>
+<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+<children><SplitPane dividerPositions="0.7765151515151515" focusTraversable="true" layoutY="-31.0" prefHeight="170.0" prefWidth="244.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+  <items>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+<children><TableView fx:id="FXTable_BBL" prefHeight="168.0" prefWidth="122.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+<columns>
+<TableColumn id="" fx:id="TC_BBL_RRV" editable="false" prefWidth="120.0" sortable="false" text="BBL's RRV" />
+                                                                                                      <TableColumn fx:id="TC_BBL_Type" editable="false" prefWidth="75.0" sortable="false" text="BBL Type" />
+<TableColumn editable="false" minWidth="0.0" prefWidth="121.0" sortable="false" text="Deprotection" visible="false" />
+</columns>
+</TableView>
+</children></AnchorPane>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+<children><TableView fx:id="FXTable_FragmentConnection" layoutX="-73.0" layoutY="-46.0" prefHeight="168.0" prefWidth="114.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+  <columns>
+    <TableColumn fx:id="TC_FragmentConnection" editable="false" prefWidth="280.0" text="Fragment Connection" />
+  </columns>
+</TableView>
+</children></AnchorPane>
+  </items>
+</SplitPane>
+</children>
+</AnchorPane>
+</items>
+</SplitPane>
+</children>
+</AnchorPane>
+</items>
+</SplitPane>
+</children></AnchorPane>
+      </content>
+    </Tab>
+    <Tab fx:id="FXTab_ResultDialog" disable="true" text="Result Text">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+<children>
+                                                            <BorderPane prefHeight="348.0" prefWidth="560.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                               <center>
+                                                                  <TextArea fx:id="ResultText" editable="false" prefHeight="348.0" prefWidth="750.0" promptText="Welcome!" BorderPane.alignment="CENTER">
+      <font>
+      <Font size="14.0" />
+      </font>
+                                                                  </TextArea>
+                                                               </center>
+                                                               <top>
+                                                                  <Button mnemonicParsing="false" onAction="#SaveResultText" text="Save Result Text" BorderPane.alignment="CENTER_LEFT">
+                                                                     <font>
+                                                                        <Font name="System Bold" size="14.0" />
+                                                                     </font>
+                                                                  </Button>
+                                                               </top>
+                                                            </BorderPane>
+</children></AnchorPane>
+      </content>
+    </Tab>
+  </tabs>
+</TabPane>
+</center></BorderPane>
+</children>
+                    </AnchorPane>
+                  </items>
+                </SplitPane>
+              </children>
+            </AnchorPane>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+              <children><TabPane fx:id="FXTabPane_Lib" prefHeight="761.0" prefWidth="510.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+  <tabs>
+    <Tab fx:id="FXTab_ExpLib" closable="false" text="Experimental Building Block Library">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+<children>
+                <SplitPane dividerPositions="0.4794520547945205" focusTraversable="true" orientation="VERTICAL" prefHeight="376.0" prefWidth="296.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <items>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                      <children>
+                        <BorderPane prefHeight="321.0" prefWidth="469.0" style="-fx-background-color: #ffffff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                          <bottom>
+                            <TextArea id="" fx:id="IUPACText" prefHeight="48.0" prefWidth="469.0" promptText="IUPAC" wrapText="true" />
+                          </bottom>
+                          <center>
+                            <ImageView id="browser" fx:id="ImageBuildingBlockBrowser" fitHeight="225.0" fitWidth="450.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                              <BorderPane.margin>
+                                <Insets />
+                              </BorderPane.margin>
+                            </ImageView>
+                          </center>
+<top><ToolBar prefWidth="200.0" BorderPane.alignment="CENTER">
+  <items>
+    <Button fx:id="ShowIUPACNameButton" mnemonicParsing="false" onAction="#ShowBBLIUPAC" text="Hide IUPAC Name">
+<font>
+<Font size="14.0" />
+</font></Button>
+  </items>
+</ToolBar>
+</top>
+                        </BorderPane>
+                      </children>
+                    </AnchorPane>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                      <children>
+                        <TableView id="libraryTable" fx:id="LibraryTable" prefHeight="184.0" prefWidth="294.0" styleClass="mainFxmlClass" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                          <columns>
+                            <TableColumn fx:id="TC_DBIdx" editable="false" prefWidth="66.0" sortable="false" text="Index" />
+                            <TableColumn fx:id="TC_RRV" editable="false" prefWidth="100.0" sortable="false" text="RRV" />
+                            <TableColumn fx:id="TC_AcceptorPosition" editable="false" prefWidth="150.0" sortable="false" text="Acceptor Position" />
+                            <TableColumn fx:id="TC_ProductAnomer" editable="false" prefWidth="156.0" sortable="false" text="Product Anomer" />
+                            <TableColumn fx:id="TC_SugarType" editable="false" prefWidth="107.0" sortable="false" text="Sugar Type" /><TableColumn fx:id="TC_DocRef" editable="false" prefWidth="120.0" sortable="false" text="Reference" visible="false" /><TableColumn fx:id="TC_Provider" editable="false" prefWidth="120.0" sortable="false" text="Provider" visible="false" />
+                          </columns>
+                        </TableView>
+                      </children>
+                    </AnchorPane>
+                  </items>
+                </SplitPane>
+</children></AnchorPane>
+      </content>
+    </Tab>
+    <Tab fx:id="FXTab_VirLib" closable="false" text="Virtual Building Block Library">
+<content>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+<children><BorderPane layoutX="209.0" layoutY="175.0" prefHeight="732.0" prefWidth="510.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+<center><TableView fx:id="LibraryTableVBBL" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+  <columns>
+                                                      <TableColumn fx:id="TC_VBBL_Selected" editable="false" prefWidth="75.0" sortable="false" text="Selection" />
+    <TableColumn fx:id="TC_VBBL_SugarType" editable="false" prefWidth="100.0" sortable="false" text="Sugar Type" />
+    <TableColumn fx:id="TC_VBBL_ProductAnomer" editable="false" prefWidth="150.0" sortable="false" text="Product Anomer" /><TableColumn fx:id="TC_VBBL_R2" editable="false" prefWidth="75.0" sortable="false" text="R2" /><TableColumn fx:id="TC_VBBL_R3" editable="false" prefWidth="75.0" sortable="false" text="R3" /><TableColumn fx:id="TC_VBBL_R4" editable="false" prefWidth="75.0" sortable="false" text="R4" /><TableColumn fx:id="TC_VBBL_R6" editable="false" prefWidth="75.0" sortable="false" text="R6" /><TableColumn fx:id="TC_VBBL_RRV" editable="false" prefWidth="120.0" sortable="false" text="Predicted RRV" />
+  </columns>
+</TableView>
+</center>
+                                             <top>
+                                                <GridPane BorderPane.alignment="CENTER">
+                                                  <columnConstraints>
+                                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="531.0" minWidth="10.0" prefWidth="95.0" />
+                                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="879.0" minWidth="10.0" prefWidth="473.0" />
+                                                  </columnConstraints>
+                                                  <rowConstraints>
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                  </rowConstraints>
+                                                   <children>
+                                                      <Label text="Sugar Type" GridPane.rowIndex="4" />
+                                                      <Label text="Product Anomer" GridPane.rowIndex="5" />
+                                                      <ToolBar prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: white;" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                                         <items>
+                                                            <CheckBox fx:id="FXCB_Gal" mnemonicParsing="false" onAction="#RefreshLibraryVBBL" selected="true" text="Gal" />
+                                                            <CheckBox fx:id="FXCB_Glc" mnemonicParsing="false" onAction="#RefreshLibraryVBBL" selected="true" text="Glc" />
+                                                            <CheckBox fx:id="FXCB_Man" mnemonicParsing="false" onAction="#RefreshLibraryVBBL" selected="true" text="Man" />
+                                                            <CheckBox fx:id="FXCB_GalNAc" mnemonicParsing="false" onAction="#RefreshLibraryVBBL" selected="true" text="GalNAc" />
+                                                            <CheckBox fx:id="FXCB_GlcNAc" mnemonicParsing="false" onAction="#RefreshLibraryVBBL" selected="true" text="GlcNAc" />
+                                                         </items>
+                                                      </ToolBar>
+                                                      <ToolBar prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: white;" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                                                         <items>
+                                                            <CheckBox fx:id="FXCB_Alpha" mnemonicParsing="false" onAction="#RefreshLibraryVBBL" selected="true" text="Alpha" />
+                                                            <CheckBox fx:id="FXCB_Beta" mnemonicParsing="false" onAction="#RefreshLibraryVBBL" selected="true" text="Beta" />
+                                                         </items>
+                                                      </ToolBar>
+                                                      <RadioButton fx:id="FXRButton_ExpLibOnly" mnemonicParsing="false" onAction="#DisableVBBL" selected="true" text="Use Experimental Library Only" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                      <RadioButton fx:id="FXRButton_ExpAndVirLib" mnemonicParsing="false" onAction="#EnableVBBL" text="Use Experimental and Virtual Libraries" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                      <Label text="Filtering" GridPane.rowIndex="3" />
+                                                      <Label text="Library for Searching" GridPane.rowIndex="1" />
+                                                      <Label text="R2" GridPane.rowIndex="6" />
+                                                      <ToolBar prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: white;" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                                                         <items>
+                                                            <CheckBox fx:id="FXCB_R2_ALL" mnemonicParsing="false" onAction="#SelectAllR2" selected="true" text="ALL" />
+                                                            <CheckBox fx:id="FXCB_R2_OH" mnemonicParsing="false" onAction="#RefreshLibraryVBBL" selected="true" text="OH" />
+                                                            <CheckBox fx:id="FXCB_R2_OAc" mnemonicParsing="false" onAction="#RefreshLibraryVBBL" selected="true" text="OAc" />
+                                                            <CheckBox fx:id="FXCB_R2_OBn" mnemonicParsing="false" onAction="#RefreshLibraryVBBL" selected="true" text="OBn" />
+                                                            <CheckBox fx:id="FXCB_R2_OBz" mnemonicParsing="false" onAction="#RefreshLibraryVBBL" selected="true" text="OBz" />
+                                                            <CheckBox fx:id="FXCB_R2_OClAc" mnemonicParsing="false" onAction="#RefreshLibraryVBBL" selected="true" text="OClAc" />
+                                                            <CheckBox fx:id="FXCB_R2_OLev" mnemonicParsing="false" onAction="#RefreshLibraryVBBL" selected="true" text="OLev" />
+                                                            <CheckBox fx:id="FXCB_R2_NO2Bz" mnemonicParsing="false" onAction="#RefreshLibraryVBBL" selected="true" text="NO2Bz" />
+                                                            <CheckBox fx:id="FXCB_R2_OPMB" mnemonicParsing="false" onAction="#RefreshLibraryVBBL" selected="true" text="OPMB" />
+                                                            <CheckBox fx:id="FXCB_R2_OTBDPS" mnemonicParsing="false" onAction="#RefreshLibraryVBBL" selected="true" text="OTBDPS" />
+                                                            <CheckBox fx:id="FXCB_R2_OTBS" mnemonicParsing="false" onAction="#RefreshLibraryVBBL" selected="true" text="OTBS" />
+                                                            <CheckBox fx:id="FXCB_R2_OTIPS" mnemonicParsing="false" onAction="#RefreshLibraryVBBL" selected="true" text="OTIPS" />
+                                                            <CheckBox fx:id="FXCB_R2_NHTroc" mnemonicParsing="false" onAction="#RefreshLibraryVBBL" selected="true" text="NHTroc" />
+                                                            <CheckBox fx:id="FXCB_R2_NPhth" mnemonicParsing="false" onAction="#RefreshLibraryVBBL" selected="true" text="NPhth" />
+                                                            <CheckBox fx:id="FXCB_R2_N3" mnemonicParsing="false" onAction="#RefreshLibraryVBBL" selected="true" text="N3" />
+                                                         </items>
+                                                      </ToolBar>
+                                                      <Label text="R3" GridPane.rowIndex="7" />
+                                                      <Label text="R4" GridPane.rowIndex="8" />
+                                                      <Label text="R6" GridPane.rowIndex="9" />
+                                                      <ToolBar prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: white;" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                                                         <items>
+                                                            <CheckBox fx:id="FXCB_R3_ALL" mnemonicParsing="false" onAction="#SelectAllR3" selected="true" text="ALL" />
+                                                            <CheckBox fx:id="FXCB_R3_OH" mnemonicParsing="false" onAction="#RefreshLibraryVBBL" selected="true" text="OH" />
+                                                            <CheckBox fx:id="FXCB_R3_OAc" mnemonicParsing="false" onAction="#RefreshLibraryVBBL" selected="true" text="OAc" />
+                                                            <CheckBox fx:id="FXCB_R3_OBn" mnemonicParsing="false" onAction="#RefreshLibraryVBBL" selected="true" text="OBn" />
+                                                            <CheckBox fx:id="FXCB_R3_OBz" mnemonicParsing="false" onAction="#RefreshLibraryVBBL" selected="true" text="OBz" />
+                                                            <CheckBox fx:id="FXCB_R3_OClAc" mnemonicParsing="false" onAction="#RefreshLibraryVBBL" selected="true" text="OClAc" />
+                                                            <CheckBox fx:id="FXCB_R3_OLev" mnemonicParsing="false" onAction="#RefreshLibraryVBBL" selected="true" text="OLev" />
+                                                            <CheckBox fx:id="FXCB_R3_NO2Bz" mnemonicParsing="false" onAction="#RefreshLibraryVBBL" selected="true" text="NO2Bz" />
+                                                            <CheckBox fx:id="FXCB_R3_OPMB" mnemonicParsing="false" onAction="#RefreshLibraryVBBL" selected="true" text="OPMB" />
+                                                            <CheckBox fx:id="FXCB_R3_OTBDPS" mnemonicParsing="false" onAction="#RefreshLibraryVBBL" selected="true" text="OTBDPS" />
+                                                            <CheckBox fx:id="FXCB_R3_OTBS" mnemonicParsing="false" onAction="#RefreshLibraryVBBL" selected="true" text="OTBS" />
+                                                            <CheckBox fx:id="FXCB_R3_OTIPS" mnemonicParsing="false" onAction="#RefreshLibraryVBBL" selected="true" text="OTIPS" />
+                                                         </items>
+                                                      </ToolBar>
+                                                      <ToolBar prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: white;" GridPane.columnIndex="1" GridPane.rowIndex="8">
+                                                         <items>
+                                                            <CheckBox fx:id="FXCB_R4_ALL" mnemonicParsing="false" onAction="#SelectAllR4" selected="true" text="ALL" />
+                                                            <CheckBox fx:id="FXCB_R4_OH" mnemonicParsing="false" onAction="#RefreshLibraryVBBL" selected="true" text="OH" />
+                                                            <CheckBox fx:id="FXCB_R4_OAc" mnemonicParsing="false" onAction="#RefreshLibraryVBBL" selected="true" text="OAc" />
+                                                            <CheckBox fx:id="FXCB_R4_OBn" mnemonicParsing="false" onAction="#RefreshLibraryVBBL" selected="true" text="OBn" />
+                                                            <CheckBox fx:id="FXCB_R4_OBz" mnemonicParsing="false" onAction="#RefreshLibraryVBBL" selected="true" text="OBz" />
+                                                            <CheckBox fx:id="FXCB_R4_OClAc" mnemonicParsing="false" onAction="#RefreshLibraryVBBL" selected="true" text="OClAc" />
+                                                            <CheckBox fx:id="FXCB_R4_OLev" mnemonicParsing="false" onAction="#RefreshLibraryVBBL" selected="true" text="OLev" />
+                                                            <CheckBox fx:id="FXCB_R4_NO2Bz" mnemonicParsing="false" onAction="#RefreshLibraryVBBL" selected="true" text="NO2Bz" />
+                                                            <CheckBox fx:id="FXCB_R4_OPMB" mnemonicParsing="false" onAction="#RefreshLibraryVBBL" selected="true" text="OPMB" />
+                                                            <CheckBox fx:id="FXCB_R4_OTBDPS" mnemonicParsing="false" onAction="#RefreshLibraryVBBL" selected="true" text="OTBDPS" />
+                                                            <CheckBox fx:id="FXCB_R4_OTBS" mnemonicParsing="false" onAction="#RefreshLibraryVBBL" selected="true" text="OTBS" />
+                                                            <CheckBox fx:id="FXCB_R4_OTIPS" mnemonicParsing="false" onAction="#RefreshLibraryVBBL" selected="true" text="OTIPS" />
+                                                         </items>
+                                                      </ToolBar>
+                                                      <ToolBar prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: white;" GridPane.columnIndex="1" GridPane.rowIndex="9">
+                                                         <items>
+                                                            <CheckBox fx:id="FXCB_R6_ALL" mnemonicParsing="false" onAction="#SelectAllR6" selected="true" text="ALL" />
+                                                            <CheckBox fx:id="FXCB_R6_OH" mnemonicParsing="false" onAction="#RefreshLibraryVBBL" selected="true" text="OH" />
+                                                            <CheckBox fx:id="FXCB_R6_OAc" mnemonicParsing="false" onAction="#RefreshLibraryVBBL" selected="true" text="OAc" />
+                                                            <CheckBox fx:id="FXCB_R6_OBn" mnemonicParsing="false" onAction="#RefreshLibraryVBBL" selected="true" text="OBn" />
+                                                            <CheckBox fx:id="FXCB_R6_OBz" mnemonicParsing="false" onAction="#RefreshLibraryVBBL" selected="true" text="OBz" />
+                                                            <CheckBox fx:id="FXCB_R6_OClAc" mnemonicParsing="false" onAction="#RefreshLibraryVBBL" selected="true" text="OClAc" />
+                                                            <CheckBox fx:id="FXCB_R6_OLev" mnemonicParsing="false" onAction="#RefreshLibraryVBBL" selected="true" text="OLev" />
+                                                            <CheckBox fx:id="FXCB_R6_NO2Bz" mnemonicParsing="false" onAction="#RefreshLibraryVBBL" selected="true" text="NO2Bz" />
+                                                            <CheckBox fx:id="FXCB_R6_OPMB" mnemonicParsing="false" onAction="#RefreshLibraryVBBL" selected="true" text="OPMB" />
+                                                            <CheckBox fx:id="FXCB_R6_OTBDPS" mnemonicParsing="false" onAction="#RefreshLibraryVBBL" selected="true" text="OTBDPS" />
+                                                            <CheckBox fx:id="FXCB_R6_OTBS" mnemonicParsing="false" onAction="#RefreshLibraryVBBL" selected="true" text="OTBS" />
+                                                            <CheckBox fx:id="FXCB_R6_OTIPS" mnemonicParsing="false" onAction="#RefreshLibraryVBBL" selected="true" text="OTIPS" />
+                                                         </items>
+                                                      </ToolBar>
+                                                   </children>
+                                                </GridPane>
+                                             </top></BorderPane>
+</children></AnchorPane>
+</content>
+    </Tab>
+  </tabs>
+</TabPane>
+              </children>
+            </AnchorPane>
+          </items>
+        </SplitPane>
+         </center>
+    </BorderPane>
+  </children>
+  <stylesheets>
+    <URL value="@mainform.css" />
+  </stylesheets>
+</AnchorPane>
