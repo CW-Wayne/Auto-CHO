@@ -276,7 +276,7 @@ public class MainProcessor {
     public Image DrawVirtualBBLChemicalStructure(String name) throws MalformedURLException{
         ImageGenerator imageGenerator = new ImageGenerator();
         //Virtual BBL Library
-        String path = "D:/Research/[Current Projects]/01.OptiMer/[Library]/VirtualBBL/VirtualBBL_" + name + ".mol";
+        String path = "" + name + ".mol";
         
         URL url = new File(path).toURI().toURL();
         imageGenerator.setMolecule(url);
