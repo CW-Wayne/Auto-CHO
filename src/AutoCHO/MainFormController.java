@@ -404,8 +404,8 @@ public class MainFormController implements Initializable {
         this.FXButton_OligoLacNAc.setDisable(false);
     }
     public void DrawGloboH() throws Exception{
-        Image image = MainProcessor.GetInstance().DrawGloboH();
-        //Image image = MainProcessor.GetInstance().DrawGloboB();
+        //Image image = MainProcessor.GetInstance().DrawGloboH();
+        Image image = MainProcessor.GetInstance().DrawGloboB();
         DrawTargetGlycan(image);
         MainProcessor.GetInstance().MinDonorAcceptorRRVRatio = 1.0;
         MainProcessor.GetInstance().MaxDonorAcceptorRRVRatio = 200.0;
@@ -1057,27 +1057,20 @@ public class MainFormController implements Initializable {
                     ID_Residue_Map.put(r.id, r);
                 }
                 
-                Glycan OldBZFragment = BFragment;
-                Glycan NewBZFragment = null;
-                
                 for(int CID: fragment.CIDList){
-                    NewBZFragment = fragmenter.getZFragment(OldBZFragment, ID_Residue_Map.get(CID + diff));
-                    //BZFragment = fragmenter.getZFragment(BZFragment, ID_Residue_Map.get(CID + diff));
-                    diff = NewBZFragment.getRoot().firstSaccharideChild().id - OldBZFragment.getRoot().firstSaccharideChild().id + diff;
-                    ID_Residue_Map.clear();
-                    for(Residue r: NewBZFragment.getAllResidues()){
-                        ID_Residue_Map.put(r.id, r);
+                    Residue r = ID_Residue_Map.get(CID + diff);
+                    r.setType(ResidueType.createZCleavage());
+                    while(r.firstSaccharideChild() != null){
+                        BFragment.removeResidue(r.firstSaccharideChild());
                     }
-                    OldBZFragment = NewBZFragment;
                 }
-                
+                Glycan NewBZFragment = BFragment;
                 if(NewBZFragment == null)
                     NewBZFragment = BFragment;
                 
                 List<Glycan> GlycanList = new ArrayList<>();
                 GlycanList.add(NewBZFragment);
-                //GlycanList.add(targetStructure);
-                BufferedImage bi = MainProcessor.GetInstance().GBF.getCanvas().getGlycanRenderer().getImage(GlycanList, false, false, true);
+                BufferedImage bi = MainProcessor.GetInstance().GBF.getCanvas().getGlycanRenderer().getImage(GlycanList, false, false, true);             
                 Image image = SwingFXUtils.toFXImage(bi, null);
 //                ImageIcon icon = new ImageIcon();
 //                icon.setImage(bi);
@@ -1162,19 +1155,41 @@ public class MainFormController implements Initializable {
             List<FXFragmentConnection> FragmentConnectionList = new ArrayList<>();
             int FragSize = NodeSolMap.get(CurrentNodeKey).get(CurrentSolIdx).FragList.size();
             
+            List<Integer> ParentFragIdxList = new ArrayList<>();
+            Map<Integer, Integer> FragMap = new HashMap<>();
+            DS_Fragment.DFSOrder(NodeSolMap.get(CurrentNodeKey).get(CurrentSolIdx).FragList);
+            
+            for(int idx1 = 0; idx1 < FragSize; idx1++){
+                DS_Fragment fragment1 = NodeSolMap.get(CurrentNodeKey).get(CurrentSolIdx).FragList.get(idx1);
+                FragMap.put(fragment1.RootID, idx1);
+                for(int idx2 = 0; idx2 < FragSize; idx2++){
+                    DS_Fragment fragment2 = NodeSolMap.get(CurrentNodeKey).get(CurrentSolIdx).FragList.get(idx2);
+                    if(fragment1.ParentFragID == fragment2.RootID){
+                        ParentFragIdxList.add(fragment1.ParentFragID);
+                        break;
+                    }    
+                }
+            }
+            
+            int DonorFragIdx = -1;
+            int AcceptorFragIdx = -1;
             for(int idx = 0; idx < FragSize; idx++){
                 FXFragmentConnection conn = new FXFragmentConnection();
                 if(FragSize == 1){
                     conn.Step = "X1: Fragment1 + Reducing End Acceptor";
                 }
                 else if(idx == 0){
-                    conn.Step = "X1: Fragment1 + Fragment2";
+                    DonorFragIdx = 0;
+                    AcceptorFragIdx = FragMap.get(ParentFragIdxList.get(idx));
+                    conn.Step = "X1: Fragment" + (DonorFragIdx + 1) + " + Fragment" + (AcceptorFragIdx + 1);
+                    DonorFragIdx = AcceptorFragIdx;
                 }
                 else if(idx == FragSize - 1){
                     conn.Step = "X" + (idx + 1) + ": X" + idx + " + Reducing End Acceptor";
                 }
                 else{
-                    conn.Step = "X" + (idx + 1) + ": X" + idx + " + Fragment" + (idx + 1);
+                    AcceptorFragIdx = FragMap.get(NodeSolMap.get(CurrentNodeKey).get(CurrentSolIdx).FragList.get(idx).RootID);
+                    conn.Step = "X" + (idx + 1) + ": X" + idx + " + Fragment" + (AcceptorFragIdx + 1);
                 }
                 FragmentConnectionList.add(conn);
             }
