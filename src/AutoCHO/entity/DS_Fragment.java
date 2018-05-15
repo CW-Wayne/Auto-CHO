@@ -100,7 +100,7 @@ public class DS_Fragment {
         }
         DFSOrder(FragmentMap, RootFragmentID, 0);
     }
-    public static Map<Integer, DS_Fragment> DFSOrder(Map<Integer, DS_Fragment> FragmentMap, int ID, int ParentFragID){
+    private static Map<Integer, DS_Fragment> DFSOrder(Map<Integer, DS_Fragment> FragmentMap, int ID, int ParentFragID){
         DS_Fragment fragment = FragmentMap.get(ID);
         fragment.ParentFragID = ParentFragID;
         for(int CID: fragment.CIDList){
@@ -108,5 +108,52 @@ public class DS_Fragment {
         }
         //System.out.println(fragment.RootID + " + " + fragment.ParentFragID);
         return FragmentMap;
+    }
+    
+    //To Get Fragment Donor-Acceptor Index Map
+    static List<DS_FragmentPair> FragmentDonorAcceptorIDPairList;
+    public static List<DS_FragmentPair> DFSOrder2(List<DS_Fragment> FragmentList){
+        //FragmentID<->Fragment
+        Map<Integer, DS_Fragment> FragmentMap = new HashMap<>();
+        
+        //FragmentID<->FragmentListIdx
+        Map<Integer, Integer> FragmentListIDIdxMap = new HashMap<>();
+        
+        //DonorFragmentID<->AcceptorFragmentID
+        FragmentDonorAcceptorIDPairList = new ArrayList<>();
+        
+        int RootFragmentID = Integer.MAX_VALUE;
+        for(int FragIdx = 0; FragIdx < FragmentList.size(); FragIdx++){
+            DS_Fragment fragment = FragmentList.get(FragIdx);
+            FragmentMap.put(fragment.RootID, fragment);
+            FragmentListIDIdxMap.put(fragment.RootID, FragIdx);
+            if(fragment.RootID < RootFragmentID){
+                RootFragmentID = fragment.RootID;
+            }
+        }
+        DFSOrder2(FragmentMap, RootFragmentID, 0);
+        List<DS_FragmentPair> FragmentDonorAcceptorIdxPairList = new ArrayList<>();
+        for(DS_FragmentPair IDPair: FragmentDonorAcceptorIDPairList){
+            DS_FragmentPair IdxPair = new DS_FragmentPair();
+            IdxPair.Donor = FragmentListIDIdxMap.get(IDPair.Donor);
+            if(IDPair.Acceptor != 0)
+                IdxPair.Acceptor = FragmentListIDIdxMap.get(IDPair.Acceptor);
+            else
+                IdxPair.Acceptor = -1;
+            FragmentDonorAcceptorIdxPairList.add(IdxPair);
+        }
+        return FragmentDonorAcceptorIdxPairList;
+    }
+    private static void DFSOrder2(Map<Integer, DS_Fragment> FragmentMap, int ID, int ParentFragID){
+        DS_Fragment fragment = FragmentMap.get(ID);
+        fragment.ParentFragID = ParentFragID;
+        for(int CID: fragment.CIDList){
+            DFSOrder2(FragmentMap, CID, ID);
+        }
+        DS_FragmentPair pair = new DS_FragmentPair();
+        pair.Donor = fragment.RootID;
+        pair.Acceptor = fragment.ParentFragID;
+        FragmentDonorAcceptorIDPairList.add(pair);
+        return;
     }
 }

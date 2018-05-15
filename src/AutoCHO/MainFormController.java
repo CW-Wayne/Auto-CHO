@@ -28,6 +28,7 @@ import javafx.scene.image.*;
 import javafx.util.Callback;
 import javax.swing.*;
 import AutoCHO.algorithm.*;
+import AutoCHO.entity.DS_FragmentPair;
 import java.awt.Desktop;
 import java.util.stream.Collectors;
 import javafx.application.Platform;
@@ -404,8 +405,8 @@ public class MainFormController implements Initializable {
         this.FXButton_OligoLacNAc.setDisable(false);
     }
     public void DrawGloboH() throws Exception{
-        //Image image = MainProcessor.GetInstance().DrawGloboH();
-        Image image = MainProcessor.GetInstance().DrawGloboB();
+        Image image = MainProcessor.GetInstance().DrawGloboH();
+        //Image image = MainProcessor.GetInstance().DrawGloboB();
         DrawTargetGlycan(image);
         MainProcessor.GetInstance().MinDonorAcceptorRRVRatio = 1.0;
         MainProcessor.GetInstance().MaxDonorAcceptorRRVRatio = 200.0;
@@ -1157,7 +1158,7 @@ public class MainFormController implements Initializable {
             
             List<Integer> ParentFragIdxList = new ArrayList<>();
             Map<Integer, Integer> FragMap = new HashMap<>();
-            DS_Fragment.DFSOrder(NodeSolMap.get(CurrentNodeKey).get(CurrentSolIdx).FragList);
+            List<DS_FragmentPair> FragmentDonorAcceptorIdxPairList = DS_Fragment.DFSOrder2(NodeSolMap.get(CurrentNodeKey).get(CurrentSolIdx).FragList);
             
             for(int idx1 = 0; idx1 < FragSize; idx1++){
                 DS_Fragment fragment1 = NodeSolMap.get(CurrentNodeKey).get(CurrentSolIdx).FragList.get(idx1);
@@ -1171,28 +1172,39 @@ public class MainFormController implements Initializable {
                 }
             }
             
-            int DonorFragIdx = -1;
-            int AcceptorFragIdx = -1;
-            for(int idx = 0; idx < FragSize; idx++){
+            List<Integer> UsedIdxList = new ArrayList<>();
+            for(int idx = 0; idx < FragmentDonorAcceptorIdxPairList.size(); idx++){
+                DS_FragmentPair pair = FragmentDonorAcceptorIdxPairList.get(idx);
+                int DonorFragIdx = pair.Donor;
+                int AcceptorFragIdx = pair.Acceptor;
                 FXFragmentConnection conn = new FXFragmentConnection();
-                if(FragSize == 1){
+                if(FragmentDonorAcceptorIdxPairList.size() == 1){
                     conn.Step = "X1: Fragment1 + Reducing End Acceptor";
                 }
                 else if(idx == 0){
-                    DonorFragIdx = 0;
-                    AcceptorFragIdx = FragMap.get(ParentFragIdxList.get(idx));
                     conn.Step = "X1: Fragment" + (DonorFragIdx + 1) + " + Fragment" + (AcceptorFragIdx + 1);
-                    DonorFragIdx = AcceptorFragIdx;
+                    UsedIdxList.add(DonorFragIdx);
+                    UsedIdxList.add(AcceptorFragIdx);
                 }
                 else if(idx == FragSize - 1){
                     conn.Step = "X" + (idx + 1) + ": X" + idx + " + Reducing End Acceptor";
                 }
                 else{
-                    AcceptorFragIdx = FragMap.get(NodeSolMap.get(CurrentNodeKey).get(CurrentSolIdx).FragList.get(idx).RootID);
-                    conn.Step = "X" + (idx + 1) + ": X" + idx + " + Fragment" + (AcceptorFragIdx + 1);
+                    if(UsedIdxList.contains(DonorFragIdx)){
+                        if(AcceptorFragIdx != -1)
+                            conn.Step = "X" + (idx + 1) + ": X" + idx + " + Fragment" + (AcceptorFragIdx + 1);
+                        else
+                            conn.Step = "X" + (idx + 1) + ": X" + idx + " + Reducing End Acceptor";
+                        UsedIdxList.add(AcceptorFragIdx);
+                    }
+                    else if(UsedIdxList.contains(AcceptorFragIdx)){
+                        conn.Step = "X" + (idx + 1) + ": Fragment" + (DonorFragIdx + 1) + " + X" + idx;
+                        UsedIdxList.add(DonorFragIdx);
+                    }
                 }
                 FragmentConnectionList.add(conn);
             }
+
             TC_FragmentConnection.setCellValueFactory(new PropertyValueFactory<FXFragmentConnection, String>("Step"));
             ObservableList<FXFragmentConnection> OFragmentConnectionList = FXCollections.observableArrayList(FragmentConnectionList);
             FXTable_FragmentConnection.setItems(OFragmentConnectionList);

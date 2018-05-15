@@ -104,7 +104,7 @@
   <content>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
 <children><BorderPane prefHeight="343.0" prefWidth="710.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-<center><Label text="Auto-CHO was developed by Academia Sinica.&#10;Beta Version&#10;&#10;Reference:&#10;Cheng-Wei Cheng, Yixuan Zhou, Wen-Harn Pan, Supriya Dey, &#10;Chung-Yi Wu, Wen-Lian Hsu, and Chi-Huey Wong, &quot;Hierarchical and &#10;Programmable One-pot Automated Synthesis of Oligosaccharides&quot;, 2018 (Submitted)." BorderPane.alignment="CENTER">
+<center><Label text="Auto-CHO was developed by Academia Sinica.&#10;Version: 1.0.0&#10;&#10;Reference:&#10;Cheng-Wei Cheng, Yixuan Zhou, Wen-Harn Pan, Supriya Dey, &#10;Chung-Yi Wu, Wen-Lian Hsu, and Chi-Huey Wong, &quot;Hierarchical and &#10;Programmable One-pot Automated Synthesis of Oligosaccharides&quot;, 2018 (Submitted)." BorderPane.alignment="CENTER">
 <font>
 <Font size="16.0" />
 </font></Label>
