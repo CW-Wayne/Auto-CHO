@@ -821,7 +821,8 @@ public class MainFormController implements Initializable {
             if(IsTargetStructureOK){
                 if(NumOfSelectedVBBL <= 500){
                     this.DisableButtons();
-                    this.Run();
+                    if(this.DisplayParameterConfirmMsg() == true)
+                        this.Run();
                     this.EnableButtons();
                 }
                 else{
@@ -879,6 +880,43 @@ public class MainFormController implements Initializable {
         this.FXTable_BBL.setDisable(true);
         this.FXTable_FragmentConnection.setDisable(true);
         this.ResultText.clear();
+    }
+    public boolean DisplayParameterConfirmMsg(){
+        StringBuffer text = new StringBuffer();
+        if(this.FXRButton_ExpLibOnly.selectedProperty().get() == true)
+            text.append("To use experimental library only\n\n");
+        else{
+            text.append("To use experimental and virtual libraries\n");
+            text.append("Number of selected virtual BBL(s) for using: " + MainFormController.GetInstance().GetSelectedVBBLIdx().size() + "\n\n");
+        }
+        text.append("Threshold of High Class RRV: ");
+        text.append(MainProcessor.GetInstance().RRV_THR_High + "\n");
+        text.append("Threshold of Medium Class RRV: ");
+        text.append(MainProcessor.GetInstance().RRV_THR_Medium + "\n");
+        text.append("Max Fragment Number: ");
+        text.append(MainProcessor.GetInstance().MaxFragNum + "\n");
+        text.append("Min BBL Number in a Fragment: ");
+        text.append(MainProcessor.GetInstance().MinBBLNumOfEachFrag + "\n");
+        text.append("Max BBL Number in a Fragment: ");
+        text.append(MainProcessor.GetInstance().MaxBBLNumOfEachFrag + "\n");
+        text.append("Min Donor/Acceptor RRV Difference: ");
+        text.append(MainProcessor.GetInstance().MinDonorAcceptorRRVDiff + "\n");
+        text.append("Min Donor/Acceptor RRV Ratio: ");
+        text.append(MainProcessor.GetInstance().MinDonorAcceptorRRVRatio + "\n");
+        text.append("Max Donor/Acceptor RRV Ratio: ");
+        text.append(MainProcessor.GetInstance().MaxDonorAcceptorRRVRatio + "\n");
+        
+        Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setTitle("Information");
+        alert.setHeaderText("Please confirm the parameter settings. To click 'OK' button to continue searching.");
+        alert.setContentText(text.toString());
+        Optional<ButtonType> result = alert.showAndWait();
+        boolean ToRun = false;
+        if(result.get() == ButtonType.OK)
+            ToRun = true;
+        else
+            ToRun = false;
+        return ToRun;
     }
     public void Run(){
         MainProcessor.GetInstance().TargetGlycan = TargetGlycan;
@@ -1078,7 +1116,7 @@ public class MainFormController implements Initializable {
 //                JOptionPane.showMessageDialog(null, icon);
                 
 //                final SwingNode swingNode = new SwingNode();
-//                this.createAndSetSwingContent(swingNode, icon);
+//                this.CreateAndSetSwingContent(swingNode, icon);
 //                StackPane pane = new StackPane();
 //                pane.getChildren().add(swingNode);
 //                Stage stage = new Stage();
@@ -1224,7 +1262,7 @@ public class MainFormController implements Initializable {
         else
             FXTabPane_Lib.getSelectionModel().select(FXTab_VirLib);
     }
-    public void createAndSetSwingContent(final SwingNode swingNode, ImageIcon icon){
+    public void CreateAndSetSwingContent(final SwingNode swingNode, ImageIcon icon){
         SwingUtilities.invokeLater(new Runnable(){
             @Override
             public void run(){
@@ -1269,19 +1307,86 @@ public class MainFormController implements Initializable {
         this.FX_MaxDonorAcceptorRRVRatio.setText(String.valueOf(MainProcessor.GetInstance().MaxDonorAcceptorRRVRatio));
     }
     public void SetSearchParametersByUser(){
-        MainProcessor.GetInstance().RRV_THR_High = Double.parseDouble(this.FX_RRV_THR_High.getText());
-        MainProcessor.GetInstance().RRV_THR_Medium = Double.parseDouble(this.FX_RRV_THR_Medium.getText());
-        MainProcessor.GetInstance().MaxFragNum = Integer.parseInt(this.FX_MaxFragNum.getText());
-        MainProcessor.GetInstance().MinFragYield = Double.parseDouble(this.FX_MinFragYield.getText());
-        MainProcessor.GetInstance().MinBBLNumOfEachFrag = Integer.parseInt(this.FX_MinBBLNumOfEachFrag.getText());
-        MainProcessor.GetInstance().MaxBBLNumOfEachFrag = Integer.parseInt(this.FX_MaxBBLNumOfEachFrag.getText());
-        MainProcessor.GetInstance().MinDonorAcceptorRRVDiff = Double.parseDouble(this.FX_MinDonorAcceptorRRVDiff.getText());
-        MainProcessor.GetInstance().MinDonorAcceptorRRVRatio = Double.parseDouble(this.FX_MinDonorAcceptorRRVRatio.getText());
-        MainProcessor.GetInstance().MaxDonorAcceptorRRVRatio = Double.parseDouble(this.FX_MaxDonorAcceptorRRVRatio.getText());
-        if(this.FX_ToggleButton_ConsiderNonSTol.textProperty().get().equals("No"))
-            MainProcessor.GetInstance().ToConsiderNonSTol = false;
-        else
-            MainProcessor.GetInstance().ToConsiderNonSTol = true;
+        double RRV_THR_High = 0;
+        double RRV_THR_Medium = 0;
+        int MaxFragNum = 0;
+        double MinFragYield = 0;
+        int MinBBLNumOfEachFrag = 0;
+        int MaxBBLNumOfEachFrag = 0;
+        double MinDonorAcceptorRRVDiff = 0;
+        double MinDonorAcceptorRRVRatio = 0;
+        double MaxDonorAcceptorRRVRatio = 0;
+        
+        try{
+            RRV_THR_High = Double.parseDouble(this.FX_RRV_THR_High.getText());
+            RRV_THR_Medium = Double.parseDouble(this.FX_RRV_THR_Medium.getText());
+            MaxFragNum = Integer.parseInt(this.FX_MaxFragNum.getText());
+            MinFragYield = Double.parseDouble(this.FX_MinFragYield.getText());
+            MinBBLNumOfEachFrag = Integer.parseInt(this.FX_MinBBLNumOfEachFrag.getText());
+            MaxBBLNumOfEachFrag = Integer.parseInt(this.FX_MaxBBLNumOfEachFrag.getText());
+            MinDonorAcceptorRRVDiff = Double.parseDouble(this.FX_MinDonorAcceptorRRVDiff.getText());
+            MinDonorAcceptorRRVRatio = Double.parseDouble(this.FX_MinDonorAcceptorRRVRatio.getText());
+            MaxDonorAcceptorRRVRatio = Double.parseDouble(this.FX_MaxDonorAcceptorRRVRatio.getText());
+            
+            StringBuffer ErrorMsg = new StringBuffer();
+            if(RRV_THR_High < RRV_THR_Medium)
+                ErrorMsg.append("'Threshold of High Class RRV' should be larger than 'Threshold of Medium Class RRV'.\n");
+            if(RRV_THR_High < 0)
+                ErrorMsg.append("'Threshold of High Class RRV' should be larger than 0.\n");
+            if(RRV_THR_Medium < 0)
+                ErrorMsg.append("'Threshold of Medium Class RRV' should be larger than 0.\n");
+            if(MaxFragNum < 1)
+                ErrorMsg.append("'Max Fragment Number' should be larger than 0.\n");
+            if(MinBBLNumOfEachFrag > MaxBBLNumOfEachFrag)
+                ErrorMsg.append("'Max BBL Number in a Fragment' should be larger than or equal to 'Min BBL Number in a Fragment'.\n");
+            if(MinBBLNumOfEachFrag < 1 || MinBBLNumOfEachFrag > 3)
+                ErrorMsg.append("'Min BBL Number in a Fragment' should be between 1 and 3.\n");
+            if(MaxBBLNumOfEachFrag < 1 || MaxBBLNumOfEachFrag > 3)
+                ErrorMsg.append("'Max BBL Number in a Fragment' should be between 1 and 3.\n");
+            if(MinDonorAcceptorRRVDiff < 1)
+                ErrorMsg.append("'Min Donor/Acceptor RRV Difference' should be larger than 1.\n");
+            if(MinDonorAcceptorRRVRatio >= MaxDonorAcceptorRRVRatio)
+                ErrorMsg.append("'Max Donor/Acceptor RRV Ratio' should be larger than 'Min Donor/Acceptor RRV Ratio'.\n");
+            if(MinDonorAcceptorRRVRatio <= 0)
+                ErrorMsg.append("'Min Donor/Acceptor RRV Ratio' should be larger than 0.\n");
+            if(MaxDonorAcceptorRRVRatio <= 0)
+                ErrorMsg.append("'Max Donor/Acceptor RRV Ratio' should be larger than 0.\n");
+            
+            if(!ErrorMsg.toString().equals("")){
+                Alert alert = new Alert(AlertType.ERROR);
+                alert.setTitle("Input error");
+                alert.setHeaderText("Please check the parameter settings.");
+                alert.setContentText(ErrorMsg.toString());
+                alert.showAndWait();
+                this.SetSearchParametersByProgram();
+                return;
+            }
+            
+            MainProcessor.GetInstance().RRV_THR_High = Double.parseDouble(this.FX_RRV_THR_High.getText());
+            MainProcessor.GetInstance().RRV_THR_Medium = Double.parseDouble(this.FX_RRV_THR_Medium.getText());
+            MainProcessor.GetInstance().MaxFragNum = Integer.parseInt(this.FX_MaxFragNum.getText());
+            MainProcessor.GetInstance().MinFragYield = Double.parseDouble(this.FX_MinFragYield.getText());
+            MainProcessor.GetInstance().MinBBLNumOfEachFrag = Integer.parseInt(this.FX_MinBBLNumOfEachFrag.getText());
+            MainProcessor.GetInstance().MaxBBLNumOfEachFrag = Integer.parseInt(this.FX_MaxBBLNumOfEachFrag.getText());
+            MainProcessor.GetInstance().MinDonorAcceptorRRVDiff = Double.parseDouble(this.FX_MinDonorAcceptorRRVDiff.getText());
+            MainProcessor.GetInstance().MinDonorAcceptorRRVRatio = Double.parseDouble(this.FX_MinDonorAcceptorRRVRatio.getText());
+            MainProcessor.GetInstance().MaxDonorAcceptorRRVRatio = Double.parseDouble(this.FX_MaxDonorAcceptorRRVRatio.getText());
+            if(this.FX_ToggleButton_ConsiderNonSTol.textProperty().get().equals("No"))
+                MainProcessor.GetInstance().ToConsiderNonSTol = false;
+            else
+                MainProcessor.GetInstance().ToConsiderNonSTol = true;
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Information");
+            alert.setHeaderText("Parameters are successful set.");
+            alert.showAndWait();
+        }
+        catch(Exception e){
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Input format error");
+            alert.setHeaderText("Please make sure all parameters are numbers.");
+            alert.showAndWait();
+            this.SetSearchParametersByProgram();
+        }
     }
     public void SetSTolSelection(){
         if(this.FX_ToggleButton_ConsiderNonSTol.textProperty().get().equals("No")){
