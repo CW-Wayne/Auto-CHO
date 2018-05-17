@@ -12,7 +12,7 @@
   <children>
     <BorderPane prefHeight="763.0" prefWidth="1138.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <center>
-        <SplitPane dividerPositions="0.23327464788732394" focusTraversable="true" prefHeight="741.0" prefWidth="1138.0" styleClass="mainFxmlClass" BorderPane.alignment="CENTER">
+        <SplitPane dividerPositions="0.6390845070422535" focusTraversable="true" prefHeight="741.0" prefWidth="1138.0" styleClass="mainFxmlClass" BorderPane.alignment="CENTER">
           <items>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
               <children>
