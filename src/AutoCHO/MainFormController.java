@@ -67,6 +67,11 @@ public class MainFormController implements Initializable {
     @FXML private Tab FXTab_VirLib;
     @FXML private RadioButton FXRButton_ExpLibOnly;
     @FXML private RadioButton FXRButton_ExpAndVirLib;
+    
+    @FXML private Button FXCB_ShowSelectedVBBL;
+    @FXML private Button FXCB_ShowFilteredVBBL;
+    @FXML private Button FXCB_ShowAllVBBL;
+    
     @FXML private CheckBox FXCB_Gal;
     @FXML private CheckBox FXCB_Glc;
     @FXML private CheckBox FXCB_Man;
@@ -664,6 +669,83 @@ public class MainFormController implements Initializable {
         }
         this.RefreshLibraryVBBL();
     }
+    public void SelectAllVBBL(){
+        this.FXCB_Gal.selectedProperty().set(true);
+        this.FXCB_Glc.selectedProperty().set(true);
+        this.FXCB_Man.selectedProperty().set(true);
+        this.FXCB_GalNAc.selectedProperty().set(true);
+        this.FXCB_GlcNAc.selectedProperty().set(true);
+        
+        this.FXCB_Alpha.selectedProperty().set(true);
+        this.FXCB_Beta.selectedProperty().set(true);
+        
+        this.FXCB_R2_ALL.selectedProperty().set(true);
+        this.FXCB_R2_NO2Bz.selectedProperty().set(true);
+        this.FXCB_R2_OAc.selectedProperty().set(true);
+        this.FXCB_R2_OBn.selectedProperty().set(true);
+        this.FXCB_R2_OBz.selectedProperty().set(true);
+        this.FXCB_R2_OClAc.selectedProperty().set(true);
+        this.FXCB_R2_OH.selectedProperty().set(true);
+        this.FXCB_R2_OLev.selectedProperty().set(true);
+        this.FXCB_R2_OPMB.selectedProperty().set(true);
+        this.FXCB_R2_OTBDPS.selectedProperty().set(true);
+        this.FXCB_R2_OTBS.selectedProperty().set(true);
+        this.FXCB_R2_OTIPS.selectedProperty().set(true);
+        this.FXCB_R2_NHTroc.selectedProperty().set(true);
+        this.FXCB_R2_NPhth.selectedProperty().set(true);
+        this.FXCB_R2_N3.selectedProperty().set(true);
+        
+        this.FXCB_R3_ALL.selectedProperty().set(true);
+        this.FXCB_R3_NO2Bz.selectedProperty().set(true);
+        this.FXCB_R3_OAc.selectedProperty().set(true);
+        this.FXCB_R3_OBn.selectedProperty().set(true);
+        this.FXCB_R3_OBz.selectedProperty().set(true);
+        this.FXCB_R3_OClAc.selectedProperty().set(true);
+        this.FXCB_R3_OH.selectedProperty().set(true);
+        this.FXCB_R3_OLev.selectedProperty().set(true);
+        this.FXCB_R3_OPMB.selectedProperty().set(true);
+        this.FXCB_R3_OTBDPS.selectedProperty().set(true);
+        this.FXCB_R3_OTBS.selectedProperty().set(true);
+        this.FXCB_R3_OTIPS.selectedProperty().set(true);
+        
+        this.FXCB_R4_ALL.selectedProperty().set(true);
+        this.FXCB_R4_NO2Bz.selectedProperty().set(true);
+        this.FXCB_R4_OAc.selectedProperty().set(true);
+        this.FXCB_R4_OBn.selectedProperty().set(true);
+        this.FXCB_R4_OBz.selectedProperty().set(true);
+        this.FXCB_R4_OClAc.selectedProperty().set(true);
+        this.FXCB_R4_OH.selectedProperty().set(true);
+        this.FXCB_R4_OLev.selectedProperty().set(true);
+        this.FXCB_R4_OPMB.selectedProperty().set(true);
+        this.FXCB_R4_OTBDPS.selectedProperty().set(true);
+        this.FXCB_R4_OTBS.selectedProperty().set(true);
+        this.FXCB_R4_OTIPS.selectedProperty().set(true);
+        
+        this.FXCB_R6_ALL.selectedProperty().set(true);
+        this.FXCB_R6_NO2Bz.selectedProperty().set(true);
+        this.FXCB_R6_OAc.selectedProperty().set(true);
+        this.FXCB_R6_OBn.selectedProperty().set(true);
+        this.FXCB_R6_OBz.selectedProperty().set(true);
+        this.FXCB_R6_OClAc.selectedProperty().set(true);
+        this.FXCB_R6_OH.selectedProperty().set(true);
+        this.FXCB_R6_OLev.selectedProperty().set(true);
+        this.FXCB_R6_OPMB.selectedProperty().set(true);
+        this.FXCB_R6_OTBDPS.selectedProperty().set(true);
+        this.FXCB_R6_OTBS.selectedProperty().set(true);
+        this.FXCB_R6_OTIPS.selectedProperty().set(true);
+        
+        this.RefreshLibraryVBBL();
+    }
+    public void ShowFilteredVBBL(){
+        RefreshLibraryVBBL();
+    }
+    public void ShowSelectedVBBL(){
+        List<DS_BuildingBlockTextVirtual> VBBLList = VBBLLib.BBLTextList.stream()
+                .filter(x -> x.selected.get() == true)
+                .collect(Collectors.toList());
+        ObservableList<DS_BuildingBlockTextVirtual> oBBTList = FXCollections.observableArrayList(VBBLList);
+        LibraryTableVBBL.setItems(oBBTList);
+    }
     public void RefreshLibraryVBBL(){
         CheckProperty();
         List<DS_BuildingBlockTextVirtual> VBBLList = VBBLLib.BBLTextList.stream()
@@ -1259,8 +1341,10 @@ public class MainFormController implements Initializable {
             LibraryTable.getSelectionModel().select(selectedBBLIdx);
             LibraryTable.scrollTo(selectedBBLIdx);
         }
-        else
+        else{
             FXTabPane_Lib.getSelectionModel().select(FXTab_VirLib);
+            this.ShowSelectedVBBL();
+        }
     }
     public void CreateAndSetSwingContent(final SwingNode swingNode, ImageIcon icon){
         SwingUtilities.invokeLater(new Runnable(){
@@ -1377,7 +1461,7 @@ public class MainFormController implements Initializable {
                 MainProcessor.GetInstance().ToConsiderNonSTol = true;
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("Information");
-            alert.setHeaderText("Parameters are successful set.");
+            alert.setHeaderText("Parameters has been set successfully.");
             alert.showAndWait();
         }
         catch(Exception e){

@@ -12,8 +12,8 @@ public class Yield {
         for (int i = 0; i < BBList.size() - 1; i++){
             int BBIdx1 = BBList.get(i);
             int BBIdx2 = BBList.get(i + 1);
-            double RRV1 = MainProcessor.GetInstance().Lib.BBLList.get(BBIdx1).RRV;
-            double RRV2 = MainProcessor.GetInstance().Lib.BBLList.get(BBIdx2).RRV;
+            double RRV1 = MainProcessor.GetInstance().CombinedBBLList.get(BBIdx1).RRV;
+            double RRV2 = MainProcessor.GetInstance().CombinedBBLList.get(BBIdx2).RRV;
             if(RRV1 < RRV2){
                 yield = -1;
                 break;
@@ -45,8 +45,8 @@ public class Yield {
         
         int BBIdx1 = BBList.get(DonorIdx);
         int BBIdx2 = BBList.get(AcceptorIdx);
-        double RRV1 = MainProcessor.GetInstance().Lib.BBLList.get(BBIdx1).RRV;
-        double RRV2 = MainProcessor.GetInstance().Lib.BBLList.get(BBIdx2).RRV;
+        double RRV1 = MainProcessor.GetInstance().CombinedBBLList.get(BBIdx1).RRV;
+        double RRV2 = MainProcessor.GetInstance().CombinedBBLList.get(BBIdx2).RRV;
         double MinDonorAcceptorRRVRatio = MainProcessor.GetInstance().MinDonorAcceptorRRVRatio;
         double MaxDonorAcceptorRRVRatio = MainProcessor.GetInstance().MaxDonorAcceptorRRVRatio;
         if(((RRV1 / RRV2) < MinDonorAcceptorRRVRatio) || ((RRV1 / RRV2) > MaxDonorAcceptorRRVRatio)){
@@ -61,8 +61,8 @@ public class Yield {
         
         int BBIdx1 = BBList.get(DonorIdx);
         int BBIdx2 = BBList.get(AcceptorIdx);
-        double RRV1 = MainProcessor.GetInstance().Lib.BBLList.get(BBIdx1).RRV;
-        double RRV2 = MainProcessor.GetInstance().Lib.BBLList.get(BBIdx2).RRV;
+        double RRV1 = MainProcessor.GetInstance().CombinedBBLList.get(BBIdx1).RRV;
+        double RRV2 = MainProcessor.GetInstance().CombinedBBLList.get(BBIdx2).RRV;
         double MinDonorAcceptorRRVDiff = MainProcessor.GetInstance().MinDonorAcceptorRRVDiff;
         if(Math.abs(RRV1 - RRV2) < MinDonorAcceptorRRVDiff){
             return false;
