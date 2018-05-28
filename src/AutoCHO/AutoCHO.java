@@ -20,7 +20,7 @@ public class AutoCHO extends Application {
         if(IsOSSupported == false){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Information");
-            alert.setHeaderText("Auto-CHO can support Windows (64bit) or macOS (64bit) currently.");
+            alert.setHeaderText("Auto-CHO supports Windows (64bit) or macOS (64bit) currently.");
             alert.showAndWait();
         }
         else{
@@ -50,11 +50,16 @@ public class AutoCHO extends Application {
             IsOSSupported = true;
             
         }
-        else if(osName.toLowerCase().contains("mac")){
+        else if(osName.toLowerCase().contains("mac") && osArch.contains("64")){
             File swtJAR = new File("lib/swt-mac.jar");
             addJarToClasspath(swtJAR);
             IsOSSupported = true;
         }
+//        else if((osName.toLowerCase().contains("linux") || osName.toLowerCase().contains("nix")) && osArch.contains("64")){
+//            File swtJAR = new File("lib/swt-linux.jar");
+//            addJarToClasspath(swtJAR);
+//            IsOSSupported = true;
+//        }
         else{
             IsOSSupported = false;
         }

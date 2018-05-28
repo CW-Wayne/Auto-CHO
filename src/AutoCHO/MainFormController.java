@@ -1,4 +1,5 @@
 package AutoCHO;
+import AutoCHO.algorithm.Search;
 import AutoCHO.entity.FXBuildingBlock;
 import AutoCHO.entity.DS_SyntheticTarget;
 import AutoCHO.entity.DS_BuildingBlock;
@@ -13,6 +14,7 @@ import AutoCHO.entity.FXNode;
 import AutoCHO.entity.DS_BuildingBlockTextVirtual;
 import AutoCHO.entity.FXSolution;
 import AutoCHO.entity.DS_NodeSolution;
+import AutoCHO.entity.DS_FragmentPair;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.*;
@@ -27,14 +29,16 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.*;
 import javafx.util.Callback;
 import javax.swing.*;
-import AutoCHO.algorithm.*;
-import AutoCHO.entity.DS_FragmentPair;
 import java.awt.Desktop;
 import java.util.stream.Collectors;
 import javafx.application.Platform;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import org.eurocarbdb.application.glycanbuilder.*;
 
 public class MainFormController implements Initializable {
@@ -57,12 +61,13 @@ public class MainFormController implements Initializable {
     //<editor-fold defaultstate="collapsed" desc="FXML Variable Declaration">
     @FXML private ImageView ImageTargetStructure;
     @FXML private Button FXButton_Edit;
-    @FXML private Button FXButton_Search;
+    @FXML public  Button FXButton_Search;
     @FXML private Button FXButton_GloboH;
     @FXML private Button FXButton_SSEA4;
     @FXML private Button FXButton_OligoLacNAc;
     
     @FXML private TabPane FXTabPane_Lib;
+    @FXML private Tab FXTab_ParameterSettings;
     @FXML private Tab FXTab_ExpLib;
     @FXML private Tab FXTab_VirLib;
     @FXML private RadioButton FXRButton_ExpLibOnly;
@@ -137,6 +142,8 @@ public class MainFormController implements Initializable {
     
     @FXML private Tab FXTab_ResultVisualization;
     @FXML private Tab FXTab_ResultDialog;
+    @FXML private ProgressIndicator FXPI_State;
+    @FXML private Label FXLabel_State;
     
     @FXML private TableView<FXNode> FXTable_ReducingEndNode;
     @FXML private TableView<FXSolution> FXTable_Solution;
@@ -402,12 +409,22 @@ public class MainFormController implements Initializable {
         this.FXButton_SSEA4.setDisable(true);
         this.FXButton_OligoLacNAc.setDisable(true);
     }
+    public void DisableTabs(){
+        this.FXTab_ParameterSettings.setDisable(true);
+        this.FXTab_ResultVisualization.setDisable(true);
+        this.FXTab_ResultDialog.setDisable(true);
+    }
     public void EnableButtons(){
         this.FXButton_Edit.setDisable(false);
         this.FXButton_Search.setDisable(false);
         this.FXButton_GloboH.setDisable(false);
         this.FXButton_SSEA4.setDisable(false);
         this.FXButton_OligoLacNAc.setDisable(false);
+    }
+    public void EnableTabs(){
+        this.FXTab_ParameterSettings.setDisable(false);
+        this.FXTab_ResultVisualization.setDisable(false);
+        this.FXTab_ResultDialog.setDisable(false);
     }
     public void DrawGloboH() throws Exception{
         Image image = MainProcessor.GetInstance().DrawGloboH();
@@ -903,9 +920,13 @@ public class MainFormController implements Initializable {
             if(IsTargetStructureOK){
                 if(NumOfSelectedVBBL <= 500){
                     this.DisableButtons();
+                    this.DisableTabs();
                     if(this.DisplayParameterConfirmMsg() == true)
                         this.Run();
-                    this.EnableButtons();
+                    else{
+                        this.EnableButtons();
+                        this.EnableTabs();
+                    }
                 }
                 else{
                     this.DisplayTooManyVBBLMsg();
@@ -1005,6 +1026,7 @@ public class MainFormController implements Initializable {
         try{
             Thread search = new Search();
             search.start();
+            MainFormController.GetInstance().EnableStateInfo();
         }
         catch(Exception e){
             System.out.println(e.toString());
@@ -1353,6 +1375,16 @@ public class MainFormController implements Initializable {
                 swingNode.setContent(new JLabel(icon));
             }
         });
+    }
+    public void EnableStateInfo(){
+        this.FXLabel_State.setText("Searching...");
+        this.FXPI_State.setProgress(-1.0);
+        this.FXPI_State.setOpacity(1);
+    }
+    public void DisableStateInfo(){
+        this.FXLabel_State.setText("Done");
+        this.FXPI_State.setProgress(1.0);
+        this.FXPI_State.setOpacity(0);
     }
     //</editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Basic Function">

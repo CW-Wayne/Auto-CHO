@@ -67,7 +67,6 @@ public class Search extends Thread{
     
     private void Search() throws InterruptedException{
         long StartTime = System.currentTimeMillis();
-        
         DS_OptGlycan TargetGlycan = SS.TargetGlycan;
         TreeMap<Integer, DS_OptResidue> TargetGlycanNode = SS.TargetGlycan.node;
         
@@ -500,6 +499,13 @@ public class Search extends Thread{
         MainFormController.GetInstance().SetNodeSolMap(NodeSolMap);
         MainFormController.GetInstance().SetLibBBLList(LibBBLList);
         MainFormController.GetInstance().ShowSolResult();
+//        MainFormController.GetInstance().DisableStateInfo();
+//        Platform.runLater(()->MainFormController.GetInstance().SetNodeSolMap(NodeSolMap));
+//        Platform.runLater(()->MainFormController.GetInstance().SetLibBBLList(LibBBLList));
+//        Platform.runLater(()->MainFormController.GetInstance().ShowSolResult());
+        Platform.runLater(()->MainFormController.GetInstance().DisableStateInfo());
+        Platform.runLater(()->MainFormController.GetInstance().EnableButtons());
+        Platform.runLater(()->MainFormController.GetInstance().EnableTabs());
     }
     
     private List<DS_OptResidue> FindLeafNodes(TreeMap<Integer, DS_OptResidue> TargetGlycanNode){
