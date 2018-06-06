@@ -17,6 +17,7 @@ import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
+import org.eurocarbdb.application.glycanbuilder.Glycan;
 
 public class Search extends Thread{
     private DS_SugarStructure SS;
@@ -487,7 +488,7 @@ public class Search extends Thread{
         }
         
         //this.InOrderForFragmentConnection(LibBBLList);
-        this.PrintNodeSolMapToResultText(true, LibBBLList);
+        this.PrintNodeSolMapToResultText(true, LibBBLList, TargetGlycanNode);
         if(MainProcessor.GetInstance().IsTestMode == true){
             this.PrintNodeSolMapToFile(MainProcessor.GetInstance().PrintToFile, LibBBLList);
             long EndTime = System.currentTimeMillis();
@@ -1293,12 +1294,12 @@ public class Search extends Thread{
         }
     }
     
-    private void PrintNodeSolMapToResultText(boolean ToPrint, List<DS_BuildingBlock> LibBBLList){
+    private void PrintNodeSolMapToResultText(boolean ToPrint, List<DS_BuildingBlock> LibBBLList,  TreeMap<Integer, DS_OptResidue> TargetGlycanNode){
         if(ToPrint){
             StringBuffer text = new StringBuffer();
             Object[] NodeSolKeys = NodeSolMap.keySet().toArray();
             Arrays.sort(NodeSolKeys);
-
+            
             text.append("Experimental Building Blocks for Searching: ALL\n");
             text.append("Virtual Building Block(s) for Searching:");
             List<Integer> SelectedVBBLIdxList = MainFormController.GetInstance().GetSelectedVBBLIdx();
@@ -1316,7 +1317,27 @@ public class Search extends Thread{
             text.append("RESULT:\n");
             for(Object obj: NodeSolKeys){
                 int ID = (int)obj;
-                text.append("MonosaccharideID:[" + ID + "]" + "\n");
+                StringBuffer r = new StringBuffer();
+                r.append("ResidueID:["+ ID + "]");
+                r.append(" Sugar:[" + TargetGlycanNode.get(ID).GBResidue.getChirality());
+                r.append("-" +  TargetGlycanNode.get(ID).GBResidue.getTypeName());
+                r.append("-" +  TargetGlycanNode.get(ID).GBResidue.getAnomericState() + "]");
+                r.append(" ParentID:[");
+                if(TargetGlycanNode.get(ID).GBResidue.getParent().isSaccharide())
+                    r.append(TargetGlycanNode.get(ID).GBResidue.getParent().id);
+                else
+                    r.append("Root");
+                r.append("]");
+                r.append(" ChildID:[");
+                int count = 1;
+                for(int CIDKey: TargetGlycanNode.get(ID).CID.keySet()){
+                    if(count > 1)
+                        r.append("|");
+                    r.append("Pos" + CIDKey + "=ID" + TargetGlycanNode.get(ID).CID.get(CIDKey));
+                    ++count;
+                }
+                r.append("]\n");
+                text.append(r.toString());
                 if(NodeSolMap.get(ID) != null){
                     for(int m = 0; m < NodeSolMap.get(ID).size(); m++){
                         text.append("Solution " + (m + 1) + ":" + "\n");

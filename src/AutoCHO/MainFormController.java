@@ -1,44 +1,27 @@
 package AutoCHO;
 import AutoCHO.algorithm.Search;
 import AutoCHO.entity.FXBuildingBlock;
-import AutoCHO.entity.DS_SyntheticTarget;
-import AutoCHO.entity.DS_BuildingBlock;
-import AutoCHO.entity.DS_Fragment;
-import AutoCHO.entity.FXFragmentConnection;
-import AutoCHO.entity.DS_OptResidue;
-import AutoCHO.entity.DS_BuildingBlockText;
-import AutoCHO.entity.DS_Library_VBBL;
-import AutoCHO.entity.FXFragment;
-import AutoCHO.entity.DS_Library;
-import AutoCHO.entity.FXNode;
-import AutoCHO.entity.DS_BuildingBlockTextVirtual;
-import AutoCHO.entity.FXSolution;
-import AutoCHO.entity.DS_NodeSolution;
-import AutoCHO.entity.DS_FragmentPair;
+import AutoCHO.entity.*;
 import java.awt.image.BufferedImage;
+import java.awt.Desktop;
 import java.io.*;
 import java.net.*;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 import javafx.collections.*;
 import javafx.embed.swing.*;
 import javafx.fxml.*;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.*;
-import javafx.util.Callback;
-import javax.swing.*;
-import java.awt.Desktop;
-import java.util.stream.Collectors;
-import javafx.application.Platform;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.CheckBoxTableCell;
+import javafx.scene.image.*;
+import javafx.application.Platform;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
+import javafx.util.Callback;
+import javax.swing.*;
 import org.eurocarbdb.application.glycanbuilder.*;
 
 public class MainFormController implements Initializable {
@@ -72,6 +55,10 @@ public class MainFormController implements Initializable {
     @FXML private Tab FXTab_VirLib;
     @FXML private RadioButton FXRButton_ExpLibOnly;
     @FXML private RadioButton FXRButton_ExpAndVirLib;
+    
+    @FXML private RadioButton FXRButton_CustomTab_ExpLibOnly;
+    @FXML private RadioButton FXRButton_CustomTab_ExampleCuotomLib;
+    @FXML private RadioButton FXRButton_CustomTab_CustomLib;
     
     @FXML private Button FXCB_ShowSelectedVBBL;
     @FXML private Button FXCB_ShowFilteredVBBL;
@@ -558,6 +545,30 @@ public class MainFormController implements Initializable {
         MainProcessor.GetInstance().LibMode = 0;
         DisableVBBLOptions();
     }
+    public void EnableExampleCustomLib(){
+        this.FXRButton_CustomTab_ExampleCuotomLib.selectedProperty().set(true);
+        this.FXRButton_CustomTab_CustomLib.selectedProperty().set(false);
+        this.FXRButton_CustomTab_ExpLibOnly.selectedProperty().set(false);
+        this.FXTab_ExpLib.setDisable(true);
+        this.FXTab_VirLib.setDisable(true);
+        MainProcessor.GetInstance().LibMode = 2;
+    }
+    public void EnableCustomLib(){
+        this.FXRButton_CustomTab_ExampleCuotomLib.selectedProperty().set(false);
+        this.FXRButton_CustomTab_CustomLib.selectedProperty().set(true);
+        this.FXRButton_CustomTab_ExpLibOnly.selectedProperty().set(false);
+        this.FXTab_ExpLib.setDisable(true);
+        this.FXTab_VirLib.setDisable(true);
+        MainProcessor.GetInstance().LibMode = 2;
+    }
+    public void DisableCustomLib(){
+        this.FXRButton_CustomTab_ExampleCuotomLib.selectedProperty().set(false);
+        this.FXRButton_CustomTab_CustomLib.selectedProperty().set(false);
+        this.FXRButton_CustomTab_ExpLibOnly.selectedProperty().set(true);
+        this.FXTab_ExpLib.setDisable(false);
+        this.FXTab_VirLib.setDisable(false);
+        MainProcessor.GetInstance().LibMode = 0;
+    }
     public void EnableVBBLOptions(){
         this.TC_VBBL_Selected.setEditable(true);
     }
@@ -902,18 +913,24 @@ public class MainFormController implements Initializable {
         fileChooser.setInitialFileName("Auto-CHO_ResultText.txt");
         //Show save file dialog
         File file = fileChooser.showSaveDialog(AutoCHO.mainStage);
+        if(file == null)
+            return;
         try {
             FileWriter fileWriter = new FileWriter(file);
             fileWriter.write(ResultText.textProperty().getValue());
             fileWriter.close();
         } catch (IOException ex) {
-            
+            return;
         }
     }
     //</editor-fold>
     //<editor-fold defaultstate="collapsed" desc="Search Function">
     public void StartSearch(){
         try{
+            if(MainProcessor.GetInstance().GBF.getCanvas().getDocument().getStructures().size() != 1){
+                this.DisplayStructureErrMsg();
+                return;
+            }
             this.Initialize(MainProcessor.GetInstance().GBF.getCanvas().getDocument().getFirstStructure());
             boolean IsTargetStructureOK = this.CheckTargetStructure();
             int NumOfSelectedVBBL = this.CheckNumOfSelectedVBBL();
@@ -938,7 +955,7 @@ public class MainFormController implements Initializable {
         }
         catch(Exception ex){
             this.DisplayStructureErrMsg();
-            System.out.println(ex.toString());
+            //System.out.println(ex.toString());
         }
     }
     public void Initialize(Glycan glycan) throws Exception{
@@ -953,7 +970,7 @@ public class MainFormController implements Initializable {
     public void DisplayStructureErrMsg(){
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("Information");
-        alert.setHeaderText("The structure information is not complete. Please check it.");
+        alert.setHeaderText("The structure information is not complete or there are too many structures. Please check it.");
         alert.showAndWait();
         this.FXTable_ReducingEndNode.getItems().clear();
         this.FXTable_Solution.getItems().clear();
