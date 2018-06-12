@@ -56,10 +56,6 @@ public class MainFormController implements Initializable {
     @FXML private RadioButton FXRButton_ExpLibOnly;
     @FXML private RadioButton FXRButton_ExpAndVirLib;
     
-    @FXML private RadioButton FXRButton_CustomTab_ExpLibOnly;
-    @FXML private RadioButton FXRButton_CustomTab_ExampleCuotomLib;
-    @FXML private RadioButton FXRButton_CustomTab_CustomLib;
-    
     @FXML private Button FXCB_ShowSelectedVBBL;
     @FXML private Button FXCB_ShowFilteredVBBL;
     @FXML private Button FXCB_ShowAllVBBL;
@@ -385,9 +381,17 @@ public class MainFormController implements Initializable {
         ImageTargetStructure.setImage(image);
     }
     public void EnableGlycanBuilder(){
-        this.DisableButtons();
-        MainProcessor.GetInstance().EnableGlycanBuilder();
-        this.DefaultExample = "";
+        if(this.FXLabel_State.getText().equals("Searching...")){
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Information");
+            alert.setHeaderText("The program is under searching. Please edit the structure later.");
+            alert.showAndWait();
+        }
+        else{
+            this.DisableButtons();
+            MainProcessor.GetInstance().EnableGlycanBuilder();
+            this.DefaultExample = "";
+        }
     }
     public void DisableButtons(){
         this.FXButton_Edit.setDisable(true);
@@ -544,30 +548,6 @@ public class MainFormController implements Initializable {
         this.FXRButton_ExpAndVirLib.selectedProperty().set(false);
         MainProcessor.GetInstance().LibMode = 0;
         DisableVBBLOptions();
-    }
-    public void EnableExampleCustomLib(){
-        this.FXRButton_CustomTab_ExampleCuotomLib.selectedProperty().set(true);
-        this.FXRButton_CustomTab_CustomLib.selectedProperty().set(false);
-        this.FXRButton_CustomTab_ExpLibOnly.selectedProperty().set(false);
-        this.FXTab_ExpLib.setDisable(true);
-        this.FXTab_VirLib.setDisable(true);
-        MainProcessor.GetInstance().LibMode = 2;
-    }
-    public void EnableCustomLib(){
-        this.FXRButton_CustomTab_ExampleCuotomLib.selectedProperty().set(false);
-        this.FXRButton_CustomTab_CustomLib.selectedProperty().set(true);
-        this.FXRButton_CustomTab_ExpLibOnly.selectedProperty().set(false);
-        this.FXTab_ExpLib.setDisable(true);
-        this.FXTab_VirLib.setDisable(true);
-        MainProcessor.GetInstance().LibMode = 2;
-    }
-    public void DisableCustomLib(){
-        this.FXRButton_CustomTab_ExampleCuotomLib.selectedProperty().set(false);
-        this.FXRButton_CustomTab_CustomLib.selectedProperty().set(false);
-        this.FXRButton_CustomTab_ExpLibOnly.selectedProperty().set(true);
-        this.FXTab_ExpLib.setDisable(false);
-        this.FXTab_VirLib.setDisable(false);
-        MainProcessor.GetInstance().LibMode = 0;
     }
     public void EnableVBBLOptions(){
         this.TC_VBBL_Selected.setEditable(true);
@@ -1043,7 +1023,7 @@ public class MainFormController implements Initializable {
         try{
             Thread search = new Search();
             search.start();
-            MainFormController.GetInstance().EnableStateInfo();
+            MainFormController.GetInstance().ShowSearchingStateInfo();
         }
         catch(Exception e){
             System.out.println(e.toString());
@@ -1232,17 +1212,6 @@ public class MainFormController implements Initializable {
                 GlycanList.add(NewBZFragment);
                 BufferedImage bi = MainProcessor.GetInstance().GBF.getCanvas().getGlycanRenderer().getImage(GlycanList, false, false, true);             
                 Image image = SwingFXUtils.toFXImage(bi, null);
-//                ImageIcon icon = new ImageIcon();
-//                icon.setImage(bi);
-//                JOptionPane.showMessageDialog(null, icon);
-                
-//                final SwingNode swingNode = new SwingNode();
-//                this.CreateAndSetSwingContent(swingNode, icon);
-//                StackPane pane = new StackPane();
-//                pane.getChildren().add(swingNode);
-//                Stage stage = new Stage();
-//                stage.setScene(new Scene(pane, 400, 200));
-//                stage.show();
                 FXFragment.FragmentImage = image;
                 FXFragment.RRV = String.format(("%.2f"), fragment.RRV);
                 FXFragment.Yield = String.format(("%.2f"), fragment.Yield * 100) + "%";
@@ -1393,12 +1362,20 @@ public class MainFormController implements Initializable {
             }
         });
     }
-    public void EnableStateInfo(){
+    public String GetFXLabel_State(){
+        return this.FXLabel_State.getText();
+    }
+    public void ShowSearchingStateInfo(){
         this.FXLabel_State.setText("Searching...");
         this.FXPI_State.setProgress(-1.0);
         this.FXPI_State.setOpacity(1);
     }
-    public void DisableStateInfo(){
+    public void ShowNoResultStateInfo(){
+        this.FXLabel_State.setText("No Result: Please try to select more suitable virtual building blocks during searching.");
+        this.FXPI_State.setProgress(1.0);
+        this.FXPI_State.setOpacity(0);
+    }
+    public void ShowFinishedStateInfo(){
         this.FXLabel_State.setText("Done");
         this.FXPI_State.setProgress(1.0);
         this.FXPI_State.setOpacity(0);

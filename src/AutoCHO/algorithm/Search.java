@@ -17,7 +17,6 @@ import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
-import org.eurocarbdb.application.glycanbuilder.Glycan;
 
 public class Search extends Thread{
     private DS_SugarStructure SS;
@@ -61,8 +60,11 @@ public class Search extends Thread{
         
         try {
             this.Search();
-        } catch (InterruptedException ex) {
-            Logger.getLogger(Search.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            Platform.runLater(()->MainFormController.GetInstance().ShowNoResultStateInfo());
+            Platform.runLater(()->MainFormController.GetInstance().EnableButtons());
+            Platform.runLater(()->MainFormController.GetInstance().EnableTabs());
         }
     }
     
@@ -487,7 +489,6 @@ public class Search extends Thread{
             NodeSolMap.get(CurrentNodeKey).sort(Comparator.comparing((DS_NodeSolution sol) -> sol.FragList.size()));
         }
         
-        //this.InOrderForFragmentConnection(LibBBLList);
         this.PrintNodeSolMapToResultText(true, LibBBLList, TargetGlycanNode);
         if(MainProcessor.GetInstance().IsTestMode == true){
             this.PrintNodeSolMapToFile(MainProcessor.GetInstance().PrintToFile, LibBBLList);
@@ -500,11 +501,11 @@ public class Search extends Thread{
         MainFormController.GetInstance().SetNodeSolMap(NodeSolMap);
         MainFormController.GetInstance().SetLibBBLList(LibBBLList);
         MainFormController.GetInstance().ShowSolResult();
-//        MainFormController.GetInstance().DisableStateInfo();
+//        MainFormController.GetInstance().ShowFinishedStateInfo();
 //        Platform.runLater(()->MainFormController.GetInstance().SetNodeSolMap(NodeSolMap));
 //        Platform.runLater(()->MainFormController.GetInstance().SetLibBBLList(LibBBLList));
 //        Platform.runLater(()->MainFormController.GetInstance().ShowSolResult());
-        Platform.runLater(()->MainFormController.GetInstance().DisableStateInfo());
+        Platform.runLater(()->MainFormController.GetInstance().ShowFinishedStateInfo());
         Platform.runLater(()->MainFormController.GetInstance().EnableButtons());
         Platform.runLater(()->MainFormController.GetInstance().EnableTabs());
     }
@@ -1176,121 +1177,6 @@ public class Search extends Thread{
                 ++FragCount;
             }
             ++SolCount;
-        }
-    }
-    
-    private void InOrderForFragmentConnection(List<DS_BuildingBlock> LibBBLList){
-        Object[] NodeSolKeys = NodeSolMap.keySet().toArray();
-        Arrays.sort(NodeSolKeys);
-
-        System.out.print("Experimental Building Blocks for Searching: ALL\n");
-        System.out.print("Virtual Building Block(s) for Searching:");
-        List<Integer> SelectedVBBLIdxList = MainFormController.GetInstance().GetSelectedVBBLIdx();
-
-        if(SelectedVBBLIdxList.size() == 0)
-            System.out.print(" None.");
-        else
-            System.out.print("\n");
-        for(int i = 0; i < SelectedVBBLIdxList.size(); i++){
-            int VBBLIdx = SelectedVBBLIdxList.get(i);
-            DS_BuildingBlockTextVirtual VBBL = MainProcessor.GetInstance().Lib_VBBL.BBLTextList.get(VBBLIdx);
-            System.out.print("\tIndex" + VBBLIdx + "\t" + VBBL.sugarType + "[" + VBBL.R2 + "," + VBBL.R3 + "," + VBBL.R4 + "," + VBBL.R6 + "]" + " PredictedRRV=" + VBBL.RRV + "\n");
-        }
-        System.out.print("\n");
-        System.out.print("RESULT:\n");
-        for(Object obj: NodeSolKeys){
-            int ID = (int)obj;
-            System.out.print("MonosaccharideID:[" + ID + "]" + "\n");
-            if(NodeSolMap.get(ID) != null){
-                for(int m = 0; m < NodeSolMap.get(ID).size(); m++){
-                    System.out.print("Solution " + (m + 1) + ":" + "\n");
-                    DS_Fragment.DFSOrder(NodeSolMap.get(ID).get(m).FragList);
-                    
-                    int FragListSize = NodeSolMap.get(ID).get(m).FragList.size();
-                    
-                    Map<Integer, DS_Fragment> FragmentMap = new HashMap<>();
-                    for(int fragIdx = 0; fragIdx < FragListSize; fragIdx++){
-                        DS_Fragment fragment = NodeSolMap.get(ID).get(m).FragList.get(fragIdx);
-                        FragmentMap.put(fragment.RootID, fragment);
-                    }
-                    for(int fragIdx = 0; fragIdx < FragListSize; fragIdx++){
-                        DS_Fragment fragment = NodeSolMap.get(ID).get(m).FragList.get(fragIdx);
-                        System.out.println("FragRootID=" + fragment.RootID + "\tParentID=" + fragment.ParentFragID + "\tRRV=" + fragment.RRV);
-                    }
-//                    for(int fragIdx = 0; fragIdx < FragListSize; fragIdx++){
-//                        DS_Fragment fragment = NodeSolMap.get(ID).get(m).FragList.get(fragIdx);
-//                        
-//                        System.out.print("\tFragment " + (fragIdx + 1) + "[Fragment Yield=");
-//                        System.out.print(String.format("%.2f", fragment.Yield * 100));
-//                        System.out.print("%]");
-//                        /*
-//                        System.out.print("[");
-//                        System.out.print("RootID: " + fragment.RootID + " | ");
-//                        System.out.print("ParentBBLID: " + fragment.ParentBBLID + " | ");
-//                        System.out.print("ParentFragID: " + fragment.ParentFragID  + " | ");
-//                        System.out.print("CID:");
-//                        for(int CID: fragment.CIDList){
-//                            System.out.print(" " + CID);
-//                        }
-//                        System.out.print("]");
-//                        */
-//                        System.out.print("[RRV=" + fragment.RRV +"]");
-//                        System.out.print("[");
-//                        System.out.print("Deprotect=");
-//                        boolean NeedToDeprotect = false;
-//                        for(String PGKey: NodeSolMap.get(ID).get(m).FragList.get(fragIdx).DePGMap.keySet()){
-//                            for(DS_PGRecord record: NodeSolMap.get(ID).get(m).FragList.get(fragIdx).DePGMap.get(PGKey)){
-//                                System.out.print(record.Position + "-");
-//                            }
-//                            System.out.print(PGKey + ",");
-//                            NeedToDeprotect = true;
-//                        }
-//                        if(NeedToDeprotect == false)
-//                            System.out.print("N/A");
-//                        System.out.print("][");
-//                        System.out.print("HasSatbleProductAnomer=" + (NodeSolMap.get(ID).get(m).FragList.get(fragIdx).HasStableProductAnomer ? "Yes" : "No"));
-//                        System.out.print("][");
-//                        System.out.print("LeavingGroup=" + (NodeSolMap.get(ID).get(m).FragList.get(fragIdx).IsSTolEnd ? "STol" : "Non-STol") + "]\n");
-//                        for(int n = 0; n < NodeSolMap.get(ID).get(m).FragList.get(fragIdx).BBLList.size(); n++){
-//                            int BBLIdx = NodeSolMap.get(ID).get(m).FragList.get(fragIdx).BBLList.get(n).BBLIdx;
-//                            System.out.print("\t\t");
-//                            System.out.print("BBL RRV=");
-//                            System.out.print(String.format("%.2f",LibBBLList.get(BBLIdx).RRV));
-//                            System.out.print("\tType=");
-//                            System.out.print(LibBBLList.get(BBLIdx).Type);
-//                            System.out.print("\tIndex=");
-//                            System.out.print(LibBBLList.get(BBLIdx).DBIdx);
-//                            System.out.print("\tProtectingGroup=[");
-//                            int firstKey = LibBBLList.get(BBLIdx).Opt_Glycan.node.firstKey();
-//                            Object[] PGKeys = LibBBLList.get(BBLIdx).Opt_Glycan.node.get(firstKey).PG.keySet().toArray();
-//                            Arrays.sort(PGKeys);
-//
-//                            for(int i = 0; i < PGKeys.length; i++){
-//                                int key = (int)PGKeys[i];
-//                                String PG = LibBBLList.get(BBLIdx).Opt_Glycan.node.get(firstKey).PG.get(key);
-//                                if(LibBBLList.get(BBLIdx).Name.equals("NeuAc") && key == 2)
-//                                    continue;
-//                                else if(key == 1)
-//                                    continue;
-//                                if(i != PGKeys.length - 1)
-//                                    System.out.print(key + ":" + PG + ",");
-//                                else
-//                                    System.out.print(key + ":" + PG + "]");
-//                            }
-//                            if(n < NodeSolMap.get(ID).get(m).FragList.get(fragIdx).BBLList.size() - 1){
-//                                System.out.print("\n");
-//                            }
-//                        }
-//                        System.out.print("\n");
-//                    }
-                }
-                if(NodeSolMap.get(ID).isEmpty()){
-                    System.out.print("--\n");
-                }
-            }
-            else{
-                System.out.print("null\n");
-            }
         }
     }
     
