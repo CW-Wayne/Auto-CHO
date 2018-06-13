@@ -1,4 +1,5 @@
 package AutoCHO;
+import chrriis.dj.nativeswing.swtimpl.NativeInterface;
 import java.io.File;
 import java.lang.reflect.Method;
 import java.net.URL;
@@ -24,6 +25,7 @@ public class AutoCHO extends Application {
             alert.showAndWait();
         }
         else{
+            NativeInterface.open();
             Parent root = FXMLLoader.load(getClass().getResource("MainForm.fxml"));
             setUserAgentStylesheet(STYLESHEET_CASPIAN);
             //setUserAgentStylesheet(STYLESHEET_MODENA);

@@ -383,6 +383,7 @@ public class MainFormController implements Initializable {
     public void EnableGlycanBuilder(){
         if(this.FXLabel_State.getText().equals("Searching...")){
             Alert alert = new Alert(AlertType.INFORMATION);
+            alert.initOwner(AutoCHO.mainStage);
             alert.setTitle("Information");
             alert.setHeaderText("The program is under searching. Please edit the structure later.");
             alert.showAndWait();
@@ -949,6 +950,7 @@ public class MainFormController implements Initializable {
     }
     public void DisplayStructureErrMsg(){
         Alert alert = new Alert(AlertType.INFORMATION);
+        alert.initOwner(AutoCHO.mainStage);
         alert.setTitle("Information");
         alert.setHeaderText("The structure information is not complete or there are too many structures. Please check it.");
         alert.showAndWait();
@@ -966,6 +968,7 @@ public class MainFormController implements Initializable {
     }
     public void DisplayTooManyVBBLMsg(){
         Alert alert = new Alert(AlertType.INFORMATION);
+        alert.initOwner(AutoCHO.mainStage);
         alert.setTitle("Information");
         alert.setHeaderText("Number of selected virtual building blocks should <= 500.");
         alert.showAndWait();
@@ -1007,6 +1010,7 @@ public class MainFormController implements Initializable {
         text.append(MainProcessor.GetInstance().MaxDonorAcceptorRRVRatio + "\n");
         
         Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.initOwner(AutoCHO.mainStage);
         alert.setTitle("Information");
         alert.setHeaderText("Please confirm the parameter settings. To click 'OK' button to continue searching.");
         alert.setContentText(text.toString());
@@ -1464,6 +1468,7 @@ public class MainFormController implements Initializable {
             
             if(!ErrorMsg.toString().equals("")){
                 Alert alert = new Alert(AlertType.ERROR);
+                alert.initOwner(AutoCHO.mainStage);
                 alert.setTitle("Input error");
                 alert.setHeaderText("Please check the parameter settings.");
                 alert.setContentText(ErrorMsg.toString());
@@ -1486,12 +1491,14 @@ public class MainFormController implements Initializable {
             else
                 MainProcessor.GetInstance().ToConsiderNonSTol = true;
             Alert alert = new Alert(AlertType.INFORMATION);
+            alert.initOwner(AutoCHO.mainStage);
             alert.setTitle("Information");
             alert.setHeaderText("Parameters has been set successfully.");
             alert.showAndWait();
         }
         catch(Exception e){
             Alert alert = new Alert(AlertType.ERROR);
+            alert.initOwner(AutoCHO.mainStage);
             alert.setTitle("Input format error");
             alert.setHeaderText("Please make sure all parameters are numbers.");
             alert.showAndWait();
