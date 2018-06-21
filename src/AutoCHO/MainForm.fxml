@@ -12,9 +12,9 @@
   <children>
     <BorderPane prefHeight="763.0" prefWidth="1138.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <center>
-        <SplitPane dividerPositions="0.6751760563380281" focusTraversable="true" prefHeight="741.0" prefWidth="1138.0" styleClass="mainFxmlClass" BorderPane.alignment="CENTER">
+        <SplitPane dividerPositions="0.585387323943662" focusTraversable="true" prefHeight="741.0" prefWidth="1138.0" styleClass="mainFxmlClass" BorderPane.alignment="CENTER">
           <items>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="761.0" prefWidth="136.0">
               <children>
                 <SplitPane fx:id="ResultPane" dividerPositions="0.4966078697421981" focusTraversable="true" orientation="VERTICAL" prefHeight="376.0" prefWidth="296.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                   <items>
@@ -104,7 +104,7 @@
   <content>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
 <children><BorderPane prefHeight="343.0" prefWidth="710.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-<center><Label text="Auto-CHO was developed by Academia Sinica.&#10;Version: 1.0.14&#10;&#10;Reference:&#10;Cheng-Wei Cheng, Yixuan Zhou, Wen-Harn Pan, Supriya Dey, &#10;Chung-Yi Wu, Wen-Lian Hsu, and Chi-Huey Wong, &quot;Hierarchical and &#10;Programmable One-pot Automated Synthesis of Oligosaccharides&quot;, 2018 (Submitted)." BorderPane.alignment="CENTER">
+<center><Label text="Auto-CHO was developed by Academia Sinica.&#10;Version: 1.0.15&#10;&#10;Reference:&#10;Cheng-Wei Cheng, Yixuan Zhou, Wen-Harn Pan, Supriya Dey, &#10;Chung-Yi Wu, Wen-Lian Hsu, and Chi-Huey Wong, &quot;Hierarchical and &#10;Programmable One-pot Automated Synthesis of Oligosaccharides&quot;, 2018 (Submitted)." BorderPane.alignment="CENTER">
 <font>
 <Font size="16.0" />
 </font></Label>
@@ -320,8 +320,8 @@
                                              <top>
                                                 <GridPane BorderPane.alignment="CENTER">
                                                   <columnConstraints>
-                                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="531.0" minWidth="10.0" prefWidth="95.0" />
-                                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="879.0" minWidth="10.0" prefWidth="473.0" />
+                                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="531.0" minWidth="10.0" prefWidth="131.0" />
+                                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="939.0" minWidth="10.0" prefWidth="337.0" />
                                                   </columnConstraints>
                                                   <rowConstraints>
                                                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -347,6 +347,8 @@
                                                             <CheckBox fx:id="FXCB_Man" mnemonicParsing="false" onAction="#RefreshLibraryVBBL" selected="true" text="Man" />
                                                             <CheckBox fx:id="FXCB_GalNAc" mnemonicParsing="false" onAction="#RefreshLibraryVBBL" selected="true" text="GalNAc" />
                                                             <CheckBox fx:id="FXCB_GlcNAc" mnemonicParsing="false" onAction="#RefreshLibraryVBBL" selected="true" text="GlcNAc" />
+                                                            <CheckBox fx:id="FXCB_GlcN" mnemonicParsing="false" onAction="#RefreshLibraryVBBL" selected="true" text="GlcN" />
+                                                            <CheckBox fx:id="FXCB_GlcA" mnemonicParsing="false" onAction="#RefreshLibraryVBBL" selected="true" text="GlcA" />
                                                          </items>
                                                       </ToolBar>
                                                       <ToolBar prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: white;" GridPane.columnIndex="1" GridPane.rowIndex="5">
@@ -428,6 +430,7 @@
                                                             <CheckBox fx:id="FXCB_R6_OTBDPS" mnemonicParsing="false" onAction="#RefreshLibraryVBBL" selected="true" text="OTBDPS" />
                                                             <CheckBox fx:id="FXCB_R6_OTBS" mnemonicParsing="false" onAction="#RefreshLibraryVBBL" selected="true" text="OTBS" />
                                                             <CheckBox fx:id="FXCB_R6_OTIPS" mnemonicParsing="false" onAction="#RefreshLibraryVBBL" selected="true" text="OTIPS" />
+                                                            <CheckBox fx:id="FXCB_R6_CO2Me" mnemonicParsing="false" onAction="#RefreshLibraryVBBL" selected="true" text="CO2Me" />
                                                          </items>
                                                       </ToolBar>
                                                       <ToolBar prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: white;" GridPane.columnIndex="1" GridPane.rowIndex="10">

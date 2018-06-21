@@ -65,6 +65,9 @@ public class MainFormController implements Initializable {
     @FXML private CheckBox FXCB_Man;
     @FXML private CheckBox FXCB_GalNAc;
     @FXML private CheckBox FXCB_GlcNAc;
+    @FXML private CheckBox FXCB_GlcA;
+    @FXML private CheckBox FXCB_GlcN;
+    
     @FXML private CheckBox FXCB_Alpha;
     @FXML private CheckBox FXCB_Beta;
     
@@ -122,6 +125,7 @@ public class MainFormController implements Initializable {
     @FXML private CheckBox FXCB_R6_OTBDPS;
     @FXML private CheckBox FXCB_R6_OTBS;
     @FXML private CheckBox FXCB_R6_OTIPS;
+    @FXML private CheckBox FXCB_R6_CO2Me;
     
     @FXML private Tab FXTab_ResultVisualization;
     @FXML private Tab FXTab_ResultDialog;
@@ -662,6 +666,7 @@ public class MainFormController implements Initializable {
             this.FXCB_R6_OTBDPS.selectedProperty().set(true);
             this.FXCB_R6_OTBS.selectedProperty().set(true);
             this.FXCB_R6_OTIPS.selectedProperty().set(true);
+            this.FXCB_R6_CO2Me.selectedProperty().set(true);
         }
         else{
             this.FXCB_R6_NO2Bz.selectedProperty().set(false);
@@ -675,6 +680,7 @@ public class MainFormController implements Initializable {
             this.FXCB_R6_OTBDPS.selectedProperty().set(false);
             this.FXCB_R6_OTBS.selectedProperty().set(false);
             this.FXCB_R6_OTIPS.selectedProperty().set(false);
+            this.FXCB_R6_CO2Me.selectedProperty().set(false);
         }
         this.RefreshLibraryVBBL();
     }
@@ -684,6 +690,8 @@ public class MainFormController implements Initializable {
         this.FXCB_Man.selectedProperty().set(true);
         this.FXCB_GalNAc.selectedProperty().set(true);
         this.FXCB_GlcNAc.selectedProperty().set(true);
+        this.FXCB_GlcN.selectedProperty().set(true);
+        this.FXCB_GlcA.selectedProperty().set(true);
         
         this.FXCB_Alpha.selectedProperty().set(true);
         this.FXCB_Beta.selectedProperty().set(true);
@@ -742,6 +750,7 @@ public class MainFormController implements Initializable {
         this.FXCB_R6_OTBDPS.selectedProperty().set(true);
         this.FXCB_R6_OTBS.selectedProperty().set(true);
         this.FXCB_R6_OTIPS.selectedProperty().set(true);
+        this.FXCB_R6_CO2Me.selectedProperty().set(true);
         
         this.RefreshLibraryVBBL();
     }
@@ -762,7 +771,9 @@ public class MainFormController implements Initializable {
                         ("Glc".equals(x.sugarType) && FXCB_Glc.selectedProperty().get() == true) || 
                         ("Man".equals(x.sugarType) && FXCB_Man.selectedProperty().get() == true) || 
                         ("GalNAc".equals(x.sugarType) && FXCB_GalNAc.selectedProperty().get() == true) ||
-                        ("GlcNAc".equals(x.sugarType) && FXCB_GlcNAc.selectedProperty().get() == true))
+                        ("GlcNAc".equals(x.sugarType) && FXCB_GlcNAc.selectedProperty().get() == true) ||
+                        ("GlcN".equals(x.sugarType) && FXCB_GlcN.selectedProperty().get() == true) ||
+                        ("GlcA".equals(x.sugarType) && FXCB_GlcA.selectedProperty().get() == true))
                 .filter(x -> ("Alpha".equals(x.productAnomer) && FXCB_Alpha.selectedProperty().get() == true) || 
                         ("Beta".equals(x.productAnomer) && FXCB_Beta.selectedProperty().get() == true))
                 .filter(x -> ("OH".equals(x.R2) && FXCB_R2_OH.selectedProperty().get() == true) || 
@@ -811,7 +822,8 @@ public class MainFormController implements Initializable {
                         ("OPMB".equals(x.R6) && FXCB_R6_OPMB.selectedProperty().get() == true) || 
                         ("OTBDPS".equals(x.R6) && FXCB_R6_OTBDPS.selectedProperty().get() == true) || 
                         ("OTBS".equals(x.R6) && FXCB_R6_OTBS.selectedProperty().get() == true) || 
-                        ("OTIPS".equals(x.R6) && FXCB_R6_OTIPS.selectedProperty().get() == true))
+                        ("OTIPS".equals(x.R6) && FXCB_R6_OTIPS.selectedProperty().get() == true) ||
+                        ("CO2Me".equals(x.R6) && FXCB_R6_CO2Me.selectedProperty().get() == true))
                 .collect(Collectors.toList());
         ObservableList<DS_BuildingBlockTextVirtual> oBBTList = FXCollections.observableArrayList(VBBLList);
         LibraryTableVBBL.setItems(oBBTList);
@@ -872,7 +884,8 @@ public class MainFormController implements Initializable {
                 FXCB_R6_OPMB.selectedProperty().get() &&
                 FXCB_R6_OTBDPS.selectedProperty().get() &&
                 FXCB_R6_OTBS.selectedProperty().get() &&
-                FXCB_R6_OTIPS.selectedProperty().get())
+                FXCB_R6_OTIPS.selectedProperty().get() &&
+                FXCB_R6_CO2Me.selectedProperty().get())
             this.FXCB_R6_ALL.selectedProperty().set(true);
         else
             this.FXCB_R6_ALL.selectedProperty().set(false);
