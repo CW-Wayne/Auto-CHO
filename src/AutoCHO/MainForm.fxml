@@ -12,9 +12,9 @@
   <children>
     <BorderPane prefHeight="763.0" prefWidth="1138.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <center>
-        <SplitPane dividerPositions="0.585387323943662" focusTraversable="true" prefHeight="741.0" prefWidth="1138.0" styleClass="mainFxmlClass" BorderPane.alignment="CENTER">
+        <SplitPane dividerPositions="0.5123239436619719" focusTraversable="true" prefHeight="741.0" prefWidth="1138.0" styleClass="mainFxmlClass" BorderPane.alignment="CENTER">
           <items>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="761.0" prefWidth="136.0">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="761.0" prefWidth="588.0">
               <children>
                 <SplitPane fx:id="ResultPane" dividerPositions="0.4966078697421981" focusTraversable="true" orientation="VERTICAL" prefHeight="376.0" prefWidth="296.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                   <items>
@@ -88,7 +88,7 @@
 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
-<children><Label text="Threshold of High Class RRV" /><Label text="Threshold of Medium Class RRV" GridPane.rowIndex="1" /><Label text="Max Fragment Number" GridPane.rowIndex="2" /><Label text="Min Fragment Yield" visible="false" GridPane.rowIndex="9" /><Label text="Min BBL Number in a Fragment" GridPane.rowIndex="3" /><Label text="Max BBL Number in a Fragment" GridPane.rowIndex="4" /><Label text="Min Donor/Acceptor RRV Difference" GridPane.rowIndex="5" /><Label text="Min Donor/Acceptor RRV Ratio" GridPane.rowIndex="6" /><Label text="Max Donor/Acceptor RRV Ratio" GridPane.rowIndex="7" /><TextField fx:id="FX_MinBBLNumOfEachFrag" GridPane.columnIndex="1" GridPane.rowIndex="3" /><TextField fx:id="FX_MaxBBLNumOfEachFrag" GridPane.columnIndex="1" GridPane.rowIndex="4" /><TextField fx:id="FX_MinDonorAcceptorRRVDiff" GridPane.columnIndex="1" GridPane.rowIndex="5" /><TextField fx:id="FX_MinDonorAcceptorRRVRatio" GridPane.columnIndex="1" GridPane.rowIndex="6" /><TextField fx:id="FX_MaxDonorAcceptorRRVRatio" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+<children><Label text="Threshold of High-Class RRV" /><Label text="Threshold of Medium-Class RRV" GridPane.rowIndex="1" /><Label text="Max Fragment Number" GridPane.rowIndex="2" /><Label text="Min Fragment Yield" visible="false" GridPane.rowIndex="9" /><Label text="Min BBL Number in a Fragment" GridPane.rowIndex="3" /><Label text="Max BBL Number in a Fragment" GridPane.rowIndex="4" /><Label text="Min Donor/Acceptor RRV Difference" GridPane.rowIndex="5" /><Label text="Min Donor/Acceptor RRV Ratio" GridPane.rowIndex="6" /><Label text="Max Donor/Acceptor RRV Ratio" GridPane.rowIndex="7" /><TextField fx:id="FX_MinBBLNumOfEachFrag" GridPane.columnIndex="1" GridPane.rowIndex="3" /><TextField fx:id="FX_MaxBBLNumOfEachFrag" GridPane.columnIndex="1" GridPane.rowIndex="4" /><TextField fx:id="FX_MinDonorAcceptorRRVDiff" GridPane.columnIndex="1" GridPane.rowIndex="5" /><TextField fx:id="FX_MinDonorAcceptorRRVRatio" GridPane.columnIndex="1" GridPane.rowIndex="6" /><TextField fx:id="FX_MaxDonorAcceptorRRVRatio" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                                                                   <TextField fx:id="FX_MinFragYield" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="9" />
                                                                   <TextField fx:id="FX_MaxFragNum" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                                                   <TextField fx:id="FX_RRV_THR_Medium" GridPane.columnIndex="1" GridPane.rowIndex="1" />
@@ -104,13 +104,84 @@
   <content>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
 <children><BorderPane prefHeight="343.0" prefWidth="710.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-<center><Label text="Auto-CHO was developed by Academia Sinica.&#10;Version: 1.0.15&#10;&#10;Reference:&#10;Cheng-Wei Cheng, Yixuan Zhou, Wen-Harn Pan, Supriya Dey, &#10;Chung-Yi Wu, Wen-Lian Hsu, and Chi-Huey Wong, &quot;Hierarchical and &#10;Programmable One-pot Automated Synthesis of Oligosaccharides&quot;, 2018 (Submitted)." BorderPane.alignment="CENTER">
-<font>
-<Font size="16.0" />
-</font></Label>
-</center>
-<bottom><Hyperlink onAction="#OpenAutoCHOWebsite" text="https://sites.google.com/view/auto-cho/home" BorderPane.alignment="CENTER" />
-</bottom></BorderPane>
+                                                               <center>
+                                                                  <GridPane BorderPane.alignment="CENTER">
+                                                                    <columnConstraints>
+                                                                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="283.0" minWidth="10.0" prefWidth="102.0" />
+                                                                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="478.0" minWidth="10.0" prefWidth="475.0" />
+                                                                    </columnConstraints>
+                                                                    <rowConstraints>
+                                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                      <RowConstraints maxHeight="98.0" minHeight="10.0" prefHeight="98.0" vgrow="SOMETIMES" />
+                                                                        <RowConstraints maxHeight="55.0" minHeight="1.0" prefHeight="27.0" vgrow="SOMETIMES" />
+                                                                        <RowConstraints maxHeight="53.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
+                                                                        <RowConstraints maxHeight="53.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                        <RowConstraints maxHeight="53.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                        <RowConstraints maxHeight="98.0" minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
+                                                                    </rowConstraints>
+                                                                     <children>
+                                                                        <Label text="Version:" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                                                                           <font>
+                                                                              <Font size="14.0" />
+                                                                           </font></Label>
+                                                                        <Label text="1.0.100" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                                           <font>
+                                                                              <Font size="14.0" />
+                                                                           </font></Label>
+                                                                        <Label text="Reference:" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                                                                           <font>
+                                                                              <Font size="14.0" />
+                                                                           </font></Label>
+                                                                        <Label text="Cheng-Wei Cheng, Yixuan Zhou, Wen-Harn Pan, Supriya Dey, &#10;Chung-Yi Wu, Wen-Lian Hsu, and Chi-Huey Wong, &#10;&quot;Hierarchical and Programmable One-pot Synthesis of Oligosaccharides&quot;, &#10;2018 (Submitted)." GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                                                                           <font>
+                                                                              <Font size="14.0" />
+                                                                           </font></Label>
+                                                                        <Label text="Website:" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
+                                                                           <font>
+                                                                              <Font size="14.0" />
+                                                                           </font></Label>
+                                                                        <Hyperlink onAction="#OpenAutoCHOWebsite" text="https://sites.google.com/view/auto-cho/home" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                                                           <font>
+                                                                              <Font size="14.0" />
+                                                                           </font></Hyperlink>
+                                                                        <Label text="User Guide:" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
+                                                                           <font>
+                                                                              <Font size="14.0" />
+                                                                           </font></Label>
+                                                                        <Hyperlink onAction="#OpenAutoCHOUserGuide" text="Online PDF" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                                                           <font>
+                                                                              <Font size="14.0" />
+                                                                           </font></Hyperlink>
+                                                                        <Label text="Source Code:" GridPane.halignment="RIGHT" GridPane.rowIndex="5">
+                                                                           <font>
+                                                                              <Font size="14.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <Hyperlink onAction="#OpenAutoCHOGitHub" text="GitHub" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                                                                           <font>
+                                                                              <Font size="14.0" />
+                                                                           </font>
+                                                                        </Hyperlink>
+                                                                        <Hyperlink onAction="#OpenAutoCHOMITLicenseWikipedia" text="MIT License" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                                                                           <font>
+                                                                              <Font size="14.0" />
+                                                                           </font>
+                                                                        </Hyperlink>
+                                                                        <Label text="License:" GridPane.halignment="RIGHT" GridPane.rowIndex="6">
+                                                                           <font>
+                                                                              <Font size="14.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                     </children>
+                                                                  </GridPane>
+                                                               </center>
+                                                               <bottom>
+                                                                  <Label text="Auto-CHO was developed by Academia Sinica" BorderPane.alignment="CENTER">
+                                                                     <font>
+                                                                        <Font size="14.0" />
+                                                                     </font></Label>
+                                                               </bottom></BorderPane>
 </children></AnchorPane>
   </content>
 </Tab>
@@ -127,11 +198,11 @@
     <Tab fx:id="FXTab_ResultVisualization" disable="true" text="Result Visualization">
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-<children><SplitPane cache="true" dividerPositions="0.6222222222222222" focusTraversable="true" layoutX="25.0" prefHeight="350.0" prefWidth="618.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+<children><SplitPane cache="true" dividerPositions="0.46048632218844987" focusTraversable="true" layoutX="25.0" prefHeight="350.0" prefWidth="618.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 <items>
 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
 <children>
-<SplitPane dividerPositions="0.6481876332622601" focusTraversable="true" layoutX="42.0" prefHeight="363.0" prefWidth="280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+<SplitPane dividerPositions="0.22328548644338117" focusTraversable="true" layoutX="42.0" prefHeight="363.0" prefWidth="280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 <items>
 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="362.0" prefWidth="292.0">
 <children>
@@ -314,6 +385,7 @@
                                                       <TableColumn fx:id="TC_VBBL_Selected" editable="false" prefWidth="75.0" sortable="false" text="Selection" />
     <TableColumn fx:id="TC_VBBL_SugarType" editable="false" prefWidth="100.0" sortable="false" text="Sugar Type" />
     <TableColumn fx:id="TC_VBBL_ProductAnomer" editable="false" prefWidth="150.0" sortable="false" text="Product Anomer" /><TableColumn fx:id="TC_VBBL_R2" editable="false" prefWidth="75.0" sortable="false" text="R2" /><TableColumn fx:id="TC_VBBL_R3" editable="false" prefWidth="75.0" sortable="false" text="R3" /><TableColumn fx:id="TC_VBBL_R4" editable="false" prefWidth="75.0" sortable="false" text="R4" /><TableColumn fx:id="TC_VBBL_R6" editable="false" prefWidth="75.0" sortable="false" text="R6" /><TableColumn fx:id="TC_VBBL_RRV" editable="false" prefWidth="120.0" sortable="false" text="Predicted RRV" />
+                                                      <TableColumn fx:id="TC_VBBL_Feedback" editable="false" prefWidth="150.0" sortable="false" text="Feedback [BBL ID]" />
   </columns>
 </TableView>
 </center>

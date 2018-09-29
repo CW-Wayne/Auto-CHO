@@ -17,8 +17,7 @@ public class DS_Library_VBBL {
     private void ReadVBBLFromCSV(){
         InputStreamReader fr;
         try{
-            //InputStream stream = this.getClass().getClassLoader().getResourceAsStream("AutoCHO/library/VirLib.csv");
-            InputStream stream = this.getClass().getClassLoader().getResourceAsStream("AutoCHO/library/VirLib_20180621.csv");
+            InputStream stream = this.getClass().getClassLoader().getResourceAsStream("AutoCHO/library/VirLib.csv");
             fr = new InputStreamReader(stream);
             this.BBLList.clear();
             String str = "";

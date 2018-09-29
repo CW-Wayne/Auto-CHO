@@ -1,8 +1,8 @@
 package AutoCHO.entity;
 import javafx.beans.property.*;
+import javafx.scene.control.Hyperlink;
 
 public class DS_BuildingBlockTextVirtual {
-    
     public BooleanProperty selected;
     public String sugarType;
     public String productAnomer;
@@ -11,7 +11,7 @@ public class DS_BuildingBlockTextVirtual {
     public String R4;
     public String R6;
     public double RRV;
-    
+    public Hyperlink feedback;
     
     public DS_BuildingBlockTextVirtual(){
         this.selected = new SimpleBooleanProperty(false);
@@ -21,7 +21,8 @@ public class DS_BuildingBlockTextVirtual {
         this.R3 = "";
         this.R4 = "";
         this.R6 = "";
-        this.RRV = -1;
+        this.RRV = -1.0;
+        this.feedback = new Hyperlink();
     }
     public BooleanProperty selectedProperty(){
         return this.selected;
@@ -46,6 +47,9 @@ public class DS_BuildingBlockTextVirtual {
     }
     public double getRRV(){
         return this.RRV;
+    }
+    public Hyperlink getFeedback(){
+        return this.feedback;
     }
     
 //    public void setSelected(BooleanProperty value){
@@ -72,5 +76,7 @@ public class DS_BuildingBlockTextVirtual {
     public void setRRV(double value){
         this.RRV = value;
     }
-    
+    public void setFeedback(Hyperlink value){
+        this.feedback = value;
+    }
 }

@@ -10,7 +10,10 @@ public class OptGlycanBuilder extends GlycanBuilder{
     public OptGlycanBuilder() throws MalformedURLException{
         super();
         try{
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            String osName = System.getProperty("os.name");
+            if(!osName.toLowerCase().contains("linux") && !osName.toLowerCase().contains("nix")){
+                UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            }
         }
         catch(Exception e){
             e.printStackTrace();

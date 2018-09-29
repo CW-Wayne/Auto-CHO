@@ -1,9 +1,7 @@
 package AutoCHO;
 import AutoCHO.algorithm.Search;
-import AutoCHO.entity.FXBuildingBlock;
 import AutoCHO.entity.*;
 import java.awt.image.BufferedImage;
-import java.awt.Desktop;
 import java.io.*;
 import java.net.*;
 import java.util.*;
@@ -14,15 +12,16 @@ import javafx.collections.*;
 import javafx.embed.swing.*;
 import javafx.fxml.*;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.cell.CheckBoxTableCell;
+import javafx.scene.control.cell.*;
 import javafx.scene.image.*;
 import javafx.application.Platform;
+import javafx.event.*;
 import javafx.stage.FileChooser;
 import javafx.util.Callback;
 import javax.swing.*;
 import org.eurocarbdb.application.glycanbuilder.*;
+import java.security.GeneralSecurityException;
 
 public class MainFormController implements Initializable {
     private static MainFormController instance = new MainFormController();
@@ -169,6 +168,7 @@ public class MainFormController implements Initializable {
     @FXML private TableColumn<DS_BuildingBlockText, String> TC_VBBL_R4;
     @FXML private TableColumn<DS_BuildingBlockText, String> TC_VBBL_R6;
     @FXML private TableColumn<DS_BuildingBlockText, Double> TC_VBBL_RRV;
+    @FXML private TableColumn<DS_BuildingBlockText, Hyperlink> TC_VBBL_Feedback;
     
     @FXML private TableColumn<DS_BuildingBlock, Image> TC_Image;
     @FXML private TableColumn<DS_BuildingBlock, Double> TC_Value;
@@ -208,7 +208,7 @@ public class MainFormController implements Initializable {
             Logger.getLogger(MainFormController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public void StartProgram(){
+    public void StartProgram() throws IOException, GeneralSecurityException{
         if(MainProcessor.GetInstance().HasMainFormBeenRun == false){
             try {
                 instance = this;
@@ -478,14 +478,34 @@ public class MainFormController implements Initializable {
         this.DefaultExample = "OlogoLacNAc";
     }
     public void OpenAutoCHOWebsite(){
-        Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
-        if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
-            try {
-                URI uri = new URI("https://sites.google.com/view/auto-cho/home");
-                desktop.browse(uri);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        try {
+            AutoCHO.hostServices.showDocument("https://sites.google.com/view/auto-cho/home");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void OpenAutoCHOUserGuide(){
+        try {
+            AutoCHO.hostServices.showDocument("https://drive.google.com/open?id=1hHpRfSuHkWv0DfAdtVAGQppBeTXsqaZK");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void OpenAutoCHOGitHub(){
+        try {
+            AutoCHO.hostServices.showDocument("https://github.com/CW-Wayne/Auto-CHO");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void OpenAutoCHOMITLicenseWikipedia(){
+        try {
+            AutoCHO.hostServices.showDocument("https://en.wikipedia.org/wiki/MIT_License");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
     
@@ -526,10 +546,27 @@ public class MainFormController implements Initializable {
         TC_VBBL_R4.setCellValueFactory(new PropertyValueFactory<>("R4"));
         TC_VBBL_R6.setCellValueFactory(new PropertyValueFactory<>("R6"));
         TC_VBBL_RRV.setCellValueFactory(new PropertyValueFactory<>("RRV"));
+        TC_VBBL_Feedback.setCellValueFactory(new PropertyValueFactory<>("feedback"));
         
         ObservableList<DS_BuildingBlockTextVirtual> oBBTList = FXCollections.observableArrayList(VBBLLib.BBLTextList);
         LibraryTableVBBL.setItems(oBBTList);
         LibraryTableVBBL.setEditable(true);
+        int VBBLIdx = 1;
+        for(DS_BuildingBlockTextVirtual VBBL: VBBLLib.BBLTextList){
+            String url = "https://docs.google.com/forms/d/e/1FAIpQLSdwkiy5eTV36Bs6vIQPTJLMB9fkxF1FzPYnihd69P4KzcI_cw/viewform?entry.309148116=" + VBBLIdx;
+            VBBL.feedback.setText("To rate [" + VBBLIdx + "]");
+            VBBL.feedback.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent e) {
+                    try {
+                        AutoCHO.hostServices.showDocument(url);
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                }
+            });
+            ++VBBLIdx;
+        }
     }
     public List<Integer> GetSelectedVBBLIdx(){
         int idx = 0;
@@ -1149,7 +1186,7 @@ public class MainFormController implements Initializable {
                 FXSolution solution = new FXSolution();
                 solution.setSolution(String.valueOf(idx + 1));
                 solution.setNumOfFrag(String.valueOf(NumOfFrag));
-                solution.setAvgFragYield(String.valueOf(String.format(("%.2f"), AvgFragYield * 100) + "%"));
+                solution.setAvgFragYield(String.valueOf(String.format(("%.0f"), AvgFragYield * 100) + "%"));
                 SolutionList.add(solution);
             }
             
@@ -1231,7 +1268,7 @@ public class MainFormController implements Initializable {
                 Image image = SwingFXUtils.toFXImage(bi, null);
                 FXFragment.FragmentImage = image;
                 FXFragment.RRV = String.format(("%.2f"), fragment.RRV);
-                FXFragment.Yield = String.format(("%.2f"), fragment.Yield * 100) + "%";
+                FXFragment.Yield = String.format(("%.0f"), fragment.Yield * 100) + "%";
                 int counter = 0;
                 for(String PG: fragment.DePGMap.keySet()){
                     FXFragment.Deprotection += PG;

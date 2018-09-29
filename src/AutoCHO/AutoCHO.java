@@ -1,9 +1,8 @@
 package AutoCHO;
 import chrriis.dj.nativeswing.swtimpl.NativeInterface;
-import java.io.File;
+import java.io.*;
 import java.lang.reflect.Method;
-import java.net.URL;
-import java.net.URLClassLoader;
+import java.net.*;
 import javafx.application.*;
 import javafx.event.EventHandler;
 import javafx.fxml.*;
@@ -14,10 +13,12 @@ import javafx.stage.*;
 public class AutoCHO extends Application {
     private static boolean IsOSSupported = false;
     public static Stage mainStage;
+    public static HostServices hostServices;
     
     @Override
     public void start(Stage primaryStage) throws Exception {
         mainStage = primaryStage;
+        hostServices = getHostServices();
         if(IsOSSupported == false){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Information");
@@ -43,25 +44,27 @@ public class AutoCHO extends Application {
         }
     }
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws MalformedURLException, FileNotFoundException {
         String osName = System.getProperty("os.name");
         String osArch = System.getProperty("os.arch");
         if(osName.toLowerCase().contains("win") && osArch.contains("64")){
             File swtJAR = new File("lib/swt-win64.jar");
             addJarToClasspath(swtJAR);
             IsOSSupported = true;
-            
+            System.setErr(new PrintStream("nul"));
         }
         else if(osName.toLowerCase().contains("mac") && osArch.contains("64")){
             File swtJAR = new File("lib/swt-mac.jar");
             addJarToClasspath(swtJAR);
             IsOSSupported = true;
+            System.setErr(new PrintStream("/dev/null"));
         }
-//        else if((osName.toLowerCase().contains("linux") || osName.toLowerCase().contains("nix")) && osArch.contains("64")){
-//            File swtJAR = new File("lib/swt-linux.jar");
-//            addJarToClasspath(swtJAR);
-//            IsOSSupported = true;
-//        }
+        else if((osName.toLowerCase().contains("linux") || osName.toLowerCase().contains("nix")) && osArch.contains("64")){
+            File swtJAR = new File("lib/swt-linux64.jar");
+            addJarToClasspath(swtJAR);
+            IsOSSupported = true;
+            System.setErr(new PrintStream("/dev/null"));
+        }
         else{
             IsOSSupported = false;
         }
