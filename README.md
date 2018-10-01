@@ -6,6 +6,7 @@ Auto-CHO is a free-to-use software developed by Academia Sinica for providing gl
 Operating System:<br>
   Microsoft Windows 7 or above (64bit).<br>
   macOS 10.13 or above (64bit).<br>
+  Ubuntu 18.04 LTS or above (Beta version).<br>
 Java Runtime Environment: version 8.0 or above (64bit).<br>
 Processor: 1GHz or higher.<br>
 Hard Drive: 5GB or more free space.<br>
@@ -14,4 +15,4 @@ Minimum screen resolution: 1024x768.<br>
 Recommended screen resolution: 1920x1080 or higher.<br>
 
 <b>Reference</b><br>
-Cheng-Wei Cheng, Yixuan Zhou, Wen-Harn Pan, Supriya Dey, Chung-Yi Wu, Wen-Lian Hsu, and Chi-Huey Wong, "Hierarchical and Programmable One-pot Automated Synthesis of Oligosaccharides", 2018 (Submitted).
+Cheng-Wei Cheng, Yixuan Zhou, Wen-Harn Pan, Supriya Dey, Chung-Yi Wu, Wen-Lian Hsu, and Chi-Huey Wong, "Hierarchical and Programmable One-pot Synthesis of Oligosaccharides", 2018 (Submitted).
