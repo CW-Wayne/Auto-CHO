@@ -228,7 +228,11 @@ public class MainFormController implements Initializable {
                 this.DefaultExample = "GloboH";
             }
             catch(Exception e){
-                e.printStackTrace();
+                if(MainProcessor.GetInstance().IsTestMode == true){
+                    StringWriter errors = new StringWriter();
+                    e.printStackTrace(new PrintWriter(errors));
+                    System.out.println(errors.toString());
+                }
             }
 
             LibraryTable.getSelectionModel().getSelectedIndices().addListener(new ListChangeListener<Integer>(){
@@ -241,7 +245,11 @@ public class MainFormController implements Initializable {
                             ShowIUPAC(BBLLib.BBTList.get(index));
                         }
                         catch(IOException e){
-                            e.printStackTrace();  
+                            if(MainProcessor.GetInstance().IsTestMode == true){
+                                StringWriter errors = new StringWriter();
+                                e.printStackTrace(new PrintWriter(errors));
+                                System.out.println(errors.toString());
+                            }
                         }
                     }
                 }
@@ -261,7 +269,11 @@ public class MainFormController implements Initializable {
                             });
                         }
                         catch(Exception e){
-                            e.printStackTrace();
+                            if(MainProcessor.GetInstance().IsTestMode == true){
+                                StringWriter errors = new StringWriter();
+                                e.printStackTrace(new PrintWriter(errors));
+                                System.out.println(errors.toString());
+                            }
                         }
                     }
                 }
@@ -283,7 +295,11 @@ public class MainFormController implements Initializable {
                             });
                         }
                         catch(Exception e){
-                            e.printStackTrace();
+                            if(MainProcessor.GetInstance().IsTestMode == true){
+                                StringWriter errors = new StringWriter();
+                                e.printStackTrace(new PrintWriter(errors));
+                                System.out.println(errors.toString());
+                            }
                         }
                     }
                 }
@@ -311,7 +327,11 @@ public class MainFormController implements Initializable {
                             RefreshResultTable_FragmentConnection();
                         }
                         catch(Exception e){
-                            e.printStackTrace();
+                            if(MainProcessor.GetInstance().IsTestMode == true){
+                                StringWriter errors = new StringWriter();
+                                e.printStackTrace(new PrintWriter(errors));
+                                System.out.println(errors.toString());
+                            }
                         }
                     }
                 }
@@ -336,7 +356,11 @@ public class MainFormController implements Initializable {
                             MoveToCurrentBBL(CurrentBBLIndex);
                         }
                         catch(Exception e){
-                            e.printStackTrace();
+                            if(MainProcessor.GetInstance().IsTestMode == true){
+                                StringWriter errors = new StringWriter();
+                                e.printStackTrace(new PrintWriter(errors));
+                                System.out.println(errors.toString());
+                            }
                         }
                     }
                 }
@@ -376,7 +400,7 @@ public class MainFormController implements Initializable {
     }
     public void StartGlycanBuilder() throws Exception{
         MainProcessor.GetInstance().HasMainFormBeenRun = true;
-        Image image = MainProcessor.GetInstance().StartGlycanBuilder();
+        //Image image = MainProcessor.GetInstance().StartGlycanBuilder();
         //DrawTargetGlycan(image);
     }
     public void DrawTargetGlycan(Image image){
@@ -435,7 +459,7 @@ public class MainFormController implements Initializable {
         MainProcessor.GetInstance().MaxBBLNumOfEachFrag = 3;
         
         this.DisableVBBL();
-        this.VBBLLib.BBLTextList.get(18335).selected.set(false);
+        this.VBBLLib.BBLTextList.get(20098).selected.set(false);
         
         SetSearchParametersByProgram();
         this.FXButton_Search.setDisable(false);
@@ -453,7 +477,7 @@ public class MainFormController implements Initializable {
         MainProcessor.GetInstance().MaxBBLNumOfEachFrag = 3;
         
         this.DisableVBBL();
-        this.VBBLLib.BBLTextList.get(18335).selected.set(false);
+        this.VBBLLib.BBLTextList.get(20098).selected.set(false);
         
         SetSearchParametersByProgram();
         this.FXButton_Search.setDisable(false);
@@ -471,17 +495,39 @@ public class MainFormController implements Initializable {
         MainProcessor.GetInstance().MaxBBLNumOfEachFrag = 3;
         
         this.EnableVBBL();
-        this.VBBLLib.BBLTextList.get(18335).selected.set(true);
+        this.VBBLLib.BBLTextList.get(20098).selected.set(true);
         
         SetSearchParametersByProgram();
         this.FXButton_Search.setDisable(false);
         this.DefaultExample = "OlogoLacNAc";
     }
+    public void DrawHeparinPetaseccharide() throws Exception{
+        Image image = MainProcessor.GetInstance().DrawHeparinPetaseccharide();
+        DrawTargetGlycan(image);
+        MainProcessor.GetInstance().MinDonorAcceptorRRVRatio = 1.0;
+        MainProcessor.GetInstance().MaxDonorAcceptorRRVRatio = 10.0;
+        MainProcessor.GetInstance().MinDonorAcceptorRRVDiff = 100.0;
+        MainProcessor.GetInstance().RRV_THR_High = 120;
+        MainProcessor.GetInstance().RRV_THR_Medium = 10;
+        MainProcessor.GetInstance().MinBBLNumOfEachFrag = 1;
+        MainProcessor.GetInstance().MaxBBLNumOfEachFrag = 3;
+        
+        this.DisableVBBL();
+        this.VBBLLib.BBLTextList.get(20098).selected.set(false);
+        
+        SetSearchParametersByProgram();
+        this.FXButton_Search.setDisable(false);
+        this.DefaultExample = "HeparinPetaseccharide";
+    }
     public void OpenAutoCHOWebsite(){
         try {
             AutoCHO.hostServices.showDocument("https://sites.google.com/view/auto-cho/home");
         } catch (Exception e) {
-            e.printStackTrace();
+            if(MainProcessor.GetInstance().IsTestMode == true){
+                StringWriter errors = new StringWriter();
+                e.printStackTrace(new PrintWriter(errors));
+                System.out.println(errors.toString());
+            }
         }
     }
     
@@ -489,7 +535,11 @@ public class MainFormController implements Initializable {
         try {
             AutoCHO.hostServices.showDocument("https://drive.google.com/open?id=1hHpRfSuHkWv0DfAdtVAGQppBeTXsqaZK");
         } catch (Exception e) {
-            e.printStackTrace();
+            if(MainProcessor.GetInstance().IsTestMode == true){
+                StringWriter errors = new StringWriter();
+                e.printStackTrace(new PrintWriter(errors));
+                System.out.println(errors.toString());
+            }
         }
     }
     
@@ -497,7 +547,11 @@ public class MainFormController implements Initializable {
         try {
             AutoCHO.hostServices.showDocument("https://github.com/CW-Wayne/Auto-CHO");
         } catch (Exception e) {
-            e.printStackTrace();
+            if(MainProcessor.GetInstance().IsTestMode == true){
+                StringWriter errors = new StringWriter();
+                e.printStackTrace(new PrintWriter(errors));
+                System.out.println(errors.toString());
+            }
         }
     }
     
@@ -505,7 +559,11 @@ public class MainFormController implements Initializable {
         try {
             AutoCHO.hostServices.showDocument("https://en.wikipedia.org/wiki/MIT_License");
         } catch (Exception e) {
-            e.printStackTrace();
+            if(MainProcessor.GetInstance().IsTestMode == true){
+                StringWriter errors = new StringWriter();
+                e.printStackTrace(new PrintWriter(errors));
+                System.out.println(errors.toString());
+            }
         }
     }
     
@@ -1080,7 +1138,11 @@ public class MainFormController implements Initializable {
             MainFormController.GetInstance().ShowSearchingStateInfo();
         }
         catch(Exception e){
-            System.out.println(e.toString());
+            if(MainProcessor.GetInstance().IsTestMode == true){
+                StringWriter errors = new StringWriter();
+                e.printStackTrace(new PrintWriter(errors));
+                System.out.println(errors.toString());
+            }
         }
     }
     //</editor-fold>
@@ -1160,12 +1222,16 @@ public class MainFormController implements Initializable {
             CurrentSolIdx = 0;
         }
         catch(Exception e){
-            e.printStackTrace();
+            if(MainProcessor.GetInstance().IsTestMode == true){
+                StringWriter errors = new StringWriter();
+                e.printStackTrace(new PrintWriter(errors));
+                System.out.println(errors.toString());
+            }
         }
     }
     public void RefreshResultTable_Solution(){
         try{
-            if(NodeSolMap.get(CurrentNodeKey).isEmpty()){
+            if(NodeSolMap.get(CurrentNodeKey) == null || NodeSolMap.get(CurrentNodeKey).isEmpty()){
                 this.FXTable_Solution.getItems().clear();
                 this.FXTable_Fragment.getItems().clear();
                 this.FXTable_BBL.getItems().clear();
@@ -1198,12 +1264,16 @@ public class MainFormController implements Initializable {
             CurrentFragIdx = 0;
         }
         catch(Exception e){
-            e.printStackTrace();
+            if(MainProcessor.GetInstance().IsTestMode == true){
+                StringWriter errors = new StringWriter();
+                e.printStackTrace(new PrintWriter(errors));
+                System.out.println(errors.toString());
+            }
         }
     }
     public void RefreshResultTable_Fragment(){
         try{
-            if(NodeSolMap.get(CurrentNodeKey).get(CurrentSolIdx).FragList.isEmpty()){
+            if(NodeSolMap.get(CurrentNodeKey).get(CurrentSolIdx).FragList == null || NodeSolMap.get(CurrentNodeKey).get(CurrentSolIdx).FragList.isEmpty()){
                 this.FXTable_Fragment.getItems().clear();
                 this.FXTable_BBL.getItems().clear();
                 this.FXTable_FragmentConnection.getItems().clear();
@@ -1307,7 +1377,11 @@ public class MainFormController implements Initializable {
             FXTable_Fragment.setItems(OFragmentList);
         }
         catch(Exception e){
-            e.printStackTrace();
+            if(MainProcessor.GetInstance().IsTestMode == true){
+                StringWriter errors = new StringWriter();
+                e.printStackTrace(new PrintWriter(errors));
+                System.out.println(errors.toString());
+            }
         }
     }
     public void RefreshResultTable_BBL(){
@@ -1328,7 +1402,11 @@ public class MainFormController implements Initializable {
             FXTable_BBL.setItems(OBuildingBlockList);
         }
         catch(Exception e){
-            e.printStackTrace();
+            if(MainProcessor.GetInstance().IsTestMode == true){
+                StringWriter errors = new StringWriter();
+                e.printStackTrace(new PrintWriter(errors));
+                System.out.println(errors.toString());
+            }
         }
     }
     public void RefreshResultTable_FragmentConnection(){
@@ -1392,7 +1470,11 @@ public class MainFormController implements Initializable {
             FXTable_FragmentConnection.setItems(OFragmentConnectionList);
         }
         catch(Exception e){
-            e.printStackTrace();
+            if(MainProcessor.GetInstance().IsTestMode == true){
+                StringWriter errors = new StringWriter();
+                e.printStackTrace(new PrintWriter(errors));
+                System.out.println(errors.toString());
+            }
         }
     }
     public void MoveToCurrentBBL(int index){
@@ -1425,9 +1507,20 @@ public class MainFormController implements Initializable {
         this.FXPI_State.setOpacity(1);
     }
     public void ShowNoResultStateInfo(){
-        this.FXLabel_State.setText("No Result: Please try to select more suitable virtual building blocks during searching.");
+        this.FXLabel_State.setText("No Result: Please try to search with more flexible parameter settings or to select suitable virtual building blocks.");
         this.FXPI_State.setProgress(1.0);
         this.FXPI_State.setOpacity(0);
+        this.FXTable_ReducingEndNode.getItems().clear();
+        this.FXTable_Solution.getItems().clear();
+        this.FXTable_Fragment.getItems().clear();
+        this.FXTable_BBL.getItems().clear();
+        this.FXTable_FragmentConnection.getItems().clear();
+        this.FXTable_ReducingEndNode.setDisable(true);
+        this.FXTable_Solution.setDisable(true);
+        this.FXTable_Fragment.setDisable(true);
+        this.FXTable_BBL.setDisable(true);
+        this.FXTable_FragmentConnection.setDisable(true);
+        this.ResultText.clear();
     }
     public void ShowFinishedStateInfo(){
         this.FXLabel_State.setText("Done");

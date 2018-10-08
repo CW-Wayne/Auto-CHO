@@ -520,29 +520,6 @@
     </Saccharide>
   </BuildingBlock>
   <BuildingBlock>
-    <IUPAC>methyl (2S,3S,4S,5R,6R)-6-(((2R,3S,4R,5R,6S)-2-(acetoxymethyl)-5-azido-4-(benzyloxy)-6-(p-tolylthio)tetrahydro-2H-pyran-3-yl)oxy)-5-(benzoyloxy)-4-(benzyloxy)-3-hydroxytetrahydro-2H-pyran-2-carboxylate</IUPAC>
-    <Index>161</Index>
-    <Source>Experimental</Source>
-    <RRV>18.2</RRV>
-    <ProductAnomer>Alpha</ProductAnomer>
-    <Saccharide Form="D" Anomer="a" ID="1" PID="0" Type="GlcN">
-      <HydroxylGroup Position="1" Value="STol" />
-      <HydroxylGroup Position="2" Value="N3" />
-      <HydroxylGroup Position="3" Value="OBn" />
-      <HydroxylGroup Position="4" Value="2" />
-      <HydroxylGroup Position="5" Value="-" />
-      <HydroxylGroup Position="6" Value="OAc" />
-    </Saccharide>       
-    <Saccharide Form="D" Anomer="b" ID="2" PID="1" Type="GlcA">
-      <HydroxylGroup Position="1" Value="1" />
-      <HydroxylGroup Position="2" Value="OBz" />
-      <HydroxylGroup Position="3" Value="OBn" />
-      <HydroxylGroup Position="4" Value="OH" />
-      <HydroxylGroup Position="5" Value="-" />
-      <HydroxylGroup Position="6" Value="CO2Me" />
-    </Saccharide>   
-  </BuildingBlock>
-  <BuildingBlock>
     <IUPAC>(2R,3S,4R,5R,6S)-5-azido-4-(benzyloxy)-2-(((tert-butyldiphenylsilyl)oxy)methyl)-6-(p-tolylthio)tetrahydro-2H-pyran-3-ol</IUPAC>
     <Index>71</Index>
     <Source>Experimental</Source>
@@ -1068,21 +1045,6 @@
       <HydroxylGroup Position="6" Value="OPh" />
     </Saccharide>   
   </BuildingBlock>
-  <BuildingBlock>
-    <IUPAC>(((2R,3S,4R,5R,6S)-5-azido-3,4-bis(benzyloxy)-6-(p-tolylthio)tetrahydro-2H-pyran-2-yl)methoxy)(tert-butyl)diphenylsilane</IUPAC>
-    <Index>160</Index>
-    <Source>Experimental</Source>
-    <RRV>132.0</RRV>
-    <ProductAnomer>Alpha</ProductAnomer>
-    <Saccharide Form="D" Anomer="a" ID="1" PID="0" Type="GlcN">
-      <HydroxylGroup Position="1" Value="STol" />
-      <HydroxylGroup Position="2" Value="N3" />
-      <HydroxylGroup Position="3" Value="OBn" />
-      <HydroxylGroup Position="4" Value="OBn" />
-      <HydroxylGroup Position="5" Value="-" />
-      <HydroxylGroup Position="6" Value="OTBDPS" />
-    </Saccharide>   
-  </BuildingBlock>  
   <BuildingBlock>
     <IUPAC>(2S,3R,4S,5R,6R)-6-(((tert-butyldiphenylsilyl)oxy)methyl)-4-hydroxy-5-((4-oxopentanoyl)oxy)-2-(p-tolylthio)tetrahydro-2H-pyran-3-yl benzoate</IUPAC>
     <Index>21</Index>

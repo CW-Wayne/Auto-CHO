@@ -9,6 +9,7 @@ import javafx.fxml.*;
 import javafx.scene.*;
 import javafx.scene.control.Alert;
 import javafx.stage.*;
+import org.eurocarbdb.application.glycanbuilder.*;
 
 public class AutoCHO extends Application {
     private static boolean IsOSSupported = false;
@@ -48,20 +49,23 @@ public class AutoCHO extends Application {
         String osName = System.getProperty("os.name");
         String osArch = System.getProperty("os.arch");
         if(osName.toLowerCase().contains("win") && osArch.contains("64")){
-            File swtJAR = new File("lib/swt-win64.jar");
-            addJarToClasspath(swtJAR);
+            //File swtJAR = new File("lib/swt-win64.jar");
+            //addJarToClasspath(swtJAR);
+            //addJARToClasspath(swtJAR);
             IsOSSupported = true;
             System.setErr(new PrintStream("nul"));
         }
         else if(osName.toLowerCase().contains("mac") && osArch.contains("64")){
-            File swtJAR = new File("lib/swt-mac.jar");
-            addJarToClasspath(swtJAR);
+            //File swtJAR = new File("lib/swt-mac.jar");
+            //addJarToClasspath(swtJAR);
+            //addJARToClasspath(swtJAR);
             IsOSSupported = true;
             System.setErr(new PrintStream("/dev/null"));
         }
         else if((osName.toLowerCase().contains("linux") || osName.toLowerCase().contains("nix")) && osArch.contains("64")){
-            File swtJAR = new File("lib/swt-linux64.jar");
-            addJarToClasspath(swtJAR);
+            //File swtJAR = new File("lib/swt-linux64.jar");
+            //addJarToClasspath(swtJAR);
+            //addJARToClasspath(swtJAR);
             IsOSSupported = true;
             System.setErr(new PrintStream("/dev/null"));
         }
@@ -85,5 +89,22 @@ public class AutoCHO extends Application {
        { 
            t.printStackTrace(); 
        } 
+    }
+    
+    public static void addJARToClasspath(File jarFile){
+        try{
+            URL url = jarFile.toURI().toURL(); 
+            URLClassLoader urlClassLoader = new URLClassLoader(new URL[]{url});
+            Class.forName("AutoCHO.AutoCHO", true, urlClassLoader);
+            System.out.println();
+            GlycanBuilder gb = new GlycanBuilder();
+            gb.setVisible(true);
+            //Method method = urlClass.getDeclaredMethod("addURL", new Class<?>[] { URL.class }); 
+            //method.setAccessible(true);         
+            //method.invoke(urlClassLoader, new Object[] { url });   
+            
+        } catch(Exception e){
+            e.printStackTrace(); 
+        }
     }
 }

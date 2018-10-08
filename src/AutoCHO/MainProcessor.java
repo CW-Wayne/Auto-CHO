@@ -64,7 +64,6 @@ public class MainProcessor {
         catch(Exception e){
             Logger.getLogger(MainProcessor.class.getName()).log(Level.SEVERE, null, e);
         }
-        
     }
     
     private void InitializeSearchParameters(){
@@ -118,48 +117,6 @@ public class MainProcessor {
         //Globo-H
         String synthesisTarget = "RES\n1b:b-dglc-HEX-1:5\n2b:b-dgal-HEX-1:5\n3b:a-dgal-HEX-1:5\n4b:b-dgal-HEX-1:5\n5s:n-acetyl\n6b:b-dgal-HEX-1:5\n7b:a-lgal-HEX-1:5|6:d\nLIN\n1:1o(4+1)2d\n2:2o(4+1)3d\n3:3o(3+1)4d\n4:4d(2+1)5n\n5:4o(3+1)6d\n6:6o(2+1)7d\n";
         
-        //SSEA-4
-        //String synthesisTarget = "RES\n1b:b-dglc-HEX-1:5\n2b:b-dgal-HEX-1:5\n3b:a-dgal-HEX-1:5\n4b:b-dgal-HEX-1:5\n5s:n-acetyl\n6b:b-dgal-HEX-1:5\n7b:a-dgro-dgal-NON-2:6|1:a|2:keto|3:d\n8s:n-acetyl\nLIN\n1:1o(4+1)2d\n2:2o(4+1)3d\n3:3o(3+1)4d\n4:4d(2+1)5n\n5:4o(3+1)6d\n6:6o(3+2)7d\n7:7d(5+1)8n\n";
-        
-        //SSEA-3
-        //String synthesisTarget = "RES\n1b:b-dglc-HEX-1:5\n2b:b-dgal-HEX-1:5\n3b:a-dgal-HEX-1:5\n4b:b-dgal-HEX-1:5\n5s:n-acetyl\n6b:b-dgal-HEX-1:5\nLIN\n1:1o(4+1)2d\n2:2o(4+1)3d\n3:3o(3+1)4d\n4:4d(2+1)5n\n5:4o(3+1)6d\n";
-        
-        //Heparin
-        //String synthesisTarget = "RES\n1b:a-dglc-HEX-1:5\n2s:amino\n3b:a-lido-HEX-1:5|6:a\n4b:a-dglc-HEX-1:5\n5s:amino\n6b:b-dglc-HEX-1:5|6:a\n7b:a-dglc-HEX-1:5\n8s:amino\nLIN\n1:1d(2+1)2n\n2:1o(4+1)3d\n3:3o(4+1)4d\n4:4d(2+1)5n\n5:4o(4+1)6d\n6:6o(4+1)7d\n7:7d(2+1)8n\n";
-        
-        //OligoLacNAc_NPhth
-        //String synthesisTarget = "RES\n1b:b-dglc-HEX-1:5\n2s:n-acetyl\n3b:b-dgal-HEX-1:5\n4b:b-dglc-HEX-1:5\n5s:n-acetyl\n6b:b-dgal-HEX-1:5\n7b:b-dglc-HEX-1:5\n8s:n-acetyl\nLIN\n1:1d(2+1)2n\n2:1o(4+1)3d\n3:3o(3+1)4d\n4:4d(2+1)5n\n5:4o(4+1)6d\n6:6o(3+1)7d\n7:7d(2+1)8n\n";
-        
-        //OligoLacNAc_OPMP
-        //String synthesisTarget = "RES\n1b:a-dman-HEX-1:5\n2b:b-dglc-HEX-1:5\n3s:n-acetyl\n4b:b-dgal-HEX-1:5\n5b:b-dglc-HEX-1:5\n6s:n-acetyl\n7b:b-dgal-HEX-1:5\n8b:b-dglc-HEX-1:5\n9s:n-acetyl\nLIN\n1:1o(2+1)2d\n2:2d(2+1)3n\n3:2o(4+1)4d\n4:4o(3+1)5d\n5:5d(2+1)6n\n6:5o(4+1)7d\n7:7o(3+1)8d\n8:8d(2+1)9n\n";
-        
-        //Linear Example
-        //String synthesisTarget = "RES\n1b:b-dglc-HEX-1:5\n2b:b-dgal-HEX-1:5\n3b:b-dglc-HEX-1:5\n4s:n-acetyl\n5b:a-dgal-HEX-x:x\nLIN\n1:1o(4+1)2d\n2:2o(6+1)3d\n3:3d(2+1)4n\n4:3o(4+1)5d\n";
-        
-        //N-linked Core
-        //String synthesisTarget = "RES\n1b:b-dglc-HEX-1:5\n2s:n-acetyl\n3b:b-dglc-HEX-1:5\n4s:n-acetyl\n5b:b-dman-HEX-1:5\n6b:a-dman-HEX-1:5\n7b:a-dman-HEX-1:5\nLIN\n1:1d(2+1)2n\n2:1o(4+1)3d\n3:3d(2+1)4n\n4:3o(4+1)5d\n5:5o(3+1)6d\n6:5o(6+1)7d\n";
-        
-        //LewisY hepten
-        //String synthesisTarget = "RES\n1b:b-dglc-HEX-1:5\n2s:n-acetyl\n3b:b-dgal-HEX-1:5\n4b:b-dglc-HEX-1:5\n5s:n-acetyl\n6b:a-lgal-HEX-1:5|6:d\n7b:b-dgal-HEX-1:5\n8b:a-lgal-HEX-1:5|6:d\nLIN\n1:1d(2+1)2n\n2:1o(4+1)3d\n3:3o(3+1)4d\n4:4d(2+1)5n\n5:4o(3+1)6d\n6:4o(4+1)7d\n7:7o(2+1)8d\n";
-        
-        //KH-1 epitope
-        //String synthesisTarget = "RES\n1b:b-dglc-HEX-1:5\n2s:n-acetyl\n3b:a-lgal-HEX-1:5|6:d\n4b:b-dgal-HEX-1:5\n5b:b-dglc-HEX-1:5\n6s:n-acetyl\n7b:a-lgal-HEX-1:5|6:d\n8b:b-dgal-HEX-1:5\n9b:a-lgal-HEX-1:5|6:d\nLIN\n1:1d(2+1)2n\n2:1o(3+1)3d\n3:1o(4+1)4d\n4:4o(3+1)5d\n5:5d(2+1)6n\n6:5o(3+1)7d\n7:5o(4+1)8d\n8:8o(2+1)9d\n";
-        
-        //Globo-A
-        //String synthesisTarget = "RES\n1b:b-dglc-HEX-1:5\n2b:b-dgal-HEX-1:5\n3b:a-dgal-HEX-1:5\n4b:b-dgal-HEX-1:5\n5s:n-acetyl\n6b:b-dgal-HEX-1:5\n7b:a-lgal-HEX-1:5|6:d\n8b:a-dgal-HEX-1:5\n9s:n-acetyl\nLIN\n1:1o(4+1)2d\n2:2o(4+1)3d\n3:3o(3+1)4d\n4:4d(2+1)5n\n5:4o(3+1)6d\n6:6o(2+1)7d\n7:6o(3+1)8d\n8:8d(2+1)9n\n";
-        
-        //Globo-B
-        //String synthesisTarget = "RES\n1b:b-dglc-HEX-1:5\n2b:b-dgal-HEX-1:5\n3b:a-dgal-HEX-1:5\n4b:b-dgal-HEX-1:5\n5s:n-acetyl\n6b:b-dgal-HEX-1:5\n7b:a-lgal-HEX-1:5|6:d\n8b:a-dgal-HEX-1:5\nLIN\n1:1o(4+1)2d\n2:2o(4+1)3d\n3:3o(3+1)4d\n4:4d(2+1)5n\n5:4o(3+1)6d\n6:6o(2+1)7d\n7:6o(3+1)8d\n";
-        
-        //Unknown Name
-        //String synthesisTarget = "RES\n1b:b-dglc-HEX-1:5\n2b:b-dgal-HEX-1:5\n3b:b-dglc-HEX-1:5\n4s:n-acetyl\n5b:b-dgal-HEX-1:5\n6b:b-dglc-HEX-1:5\n7s:n-acetyl\n8b:b-dgal-HEX-1:5\n9b:b-dglc-HEX-1:5\n10s:n-acetyl\n11b:b-dgal-HEX-1:5\n12b:a-dgal-HEX-1:5\n13b:b-dglc-HEX-1:5\n14s:n-acetyl\n15b:b-dgal-HEX-1:5\n16b:a-dgal-HEX-1:5\nLIN\n1:1o(4+1)2d\n2:2o(3+1)3d\n3:3d(2+1)4n\n4:3o(4+1)5d\n5:5o(3+1)6d\n6:6d(2+1)7n\n7:6o(4+1)8d\n8:8o(3+1)9d\n9:9d(2+1)10n\n10:9o(4+1)11d\n11:11o(3+1)12d\n12:8o(6+1)13d\n13:13d(2+1)14n\n14:13o(4+1)15d\n15:15o(3+1)16d\n";
-        
-        //Dimeric LeX
-        //String synthesisTarget = "RES\n1b:b-dglc-HEX-1:5\n2b:b-dgal-HEX-1:5\n3b:b-dglc-HEX-1:5\n4s:n-acetyl\n5b:b-dgal-HEX-1:5\n6b:b-dglc-HEX-1:5\n7s:n-acetyl\n8b:a-lgal-HEX-1:5|6:d\n9b:b-dgal-HEX-1:5\n10b:b-dglc-HEX-1:5\n11s:n-acetyl\n12b:a-lgal-HEX-1:5|6:d\n13b:b-dgal-HEX-1:5\nLIN\n1:1o(4+1)2d\n2:2o(3+1)3d\n3:3d(2+1)4n\n4:3o(4+1)5d\n5:5o(3+1)6d\n6:6d(2+1)7n\n7:6o(3+1)8d\n8:6o(4+1)9d\n9:9o(3+1)10d\n10:10d(2+1)11n\n11:10o(3+1)12d\n12:10o(4+1)13d\n";
-        
-        //Trimeric LeX
-        //String synthesisTarget = "RES\n1b:b-dglc-HEX-1:5\n2b:b-dgal-HEX-1:5\n3b:b-dglc-HEX-1:5\n4s:n-acetyl\n5b:a-lgal-HEX-1:5|6:d\n6b:b-dgal-HEX-1:5\n7b:b-dglc-HEX-1:5\n8s:n-acetyl\n9b:a-lgal-HEX-1:5|6:d\n10b:b-dgal-HEX-1:5\n11b:b-dglc-HEX-1:5\n12s:n-acetyl\n13b:a-lgal-HEX-1:5|6:d\n14b:b-dgal-HEX-1:5\nLIN\n1:1o(4+1)2d\n2:2o(3+1)3d\n3:3d(2+1)4n\n4:3o(3+1)5d\n5:3o(4+1)6d\n6:6o(3+1)7d\n7:7d(2+1)8n\n8:7o(3+1)9d\n9:7o(4+1)10d\n10:10o(3+1)11d\n11:11d(2+1)12n\n12:11o(3+1)13d\n13:11o(4+1)14d\n";
-        
         GlycoCTCondensedParser parser = new GlycoCTCondensedParser(false);
         MassOptions options = MassOptions.empty();
         Glycan glycan = parser.readGlycan(synthesisTarget, options);
@@ -197,8 +154,14 @@ public class MainProcessor {
     }
     
     public Image DrawOligoLacNAc() throws Exception{
-        //OligoLacNAc_OPMP
+        //OligoLacNAc
         String synthesisTarget = "RES\n1b:a-dman-HEX-1:5\n2b:b-dglc-HEX-1:5\n3s:n-acetyl\n4b:b-dgal-HEX-1:5\n5b:b-dglc-HEX-1:5\n6s:n-acetyl\n7b:b-dgal-HEX-1:5\n8b:b-dglc-HEX-1:5\n9s:n-acetyl\nLIN\n1:1o(2+1)2d\n2:2d(2+1)3n\n3:2o(4+1)4d\n4:4o(3+1)5d\n5:5d(2+1)6n\n6:5o(4+1)7d\n7:7o(3+1)8d\n8:8d(2+1)9n\n";
+        return DrawTargetGlycan(synthesisTarget);
+    }
+    
+    public Image DrawHeparinPetaseccharide() throws Exception{
+        //Heparin Petaseccharide
+        String synthesisTarget = "RES\n1b:a-dglc-HEX-1:5\n2s:amino\n3b:a-lido-HEX-1:5|6:a\n4b:a-dglc-HEX-1:5\n5s:amino\n6b:b-dglc-HEX-1:5|6:a\n7b:a-dglc-HEX-1:5\n8s:amino\nLIN\n1:1d(2+1)2n\n2:1o(4+1)3d\n3:3o(4+1)4d\n4:4d(2+1)5n\n5:4o(4+1)6d\n6:6o(4+1)7d\n7:7d(2+1)8n\n";
         return DrawTargetGlycan(synthesisTarget);
     }
     

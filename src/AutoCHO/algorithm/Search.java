@@ -14,8 +14,6 @@ import AutoCHO.MainFormController;
 import AutoCHO.MainProcessor;
 import java.io.*;
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.application.Platform;
 
 public class Search extends Thread{
@@ -61,7 +59,11 @@ public class Search extends Thread{
         try {
             this.Search();
         } catch (Exception e) {
-            System.out.println(e.toString());
+            if(this.IsTestMode == true){
+                StringWriter errors = new StringWriter();
+                e.printStackTrace(new PrintWriter(errors));
+                System.out.println(errors.toString());
+            }
             Platform.runLater(()->MainFormController.GetInstance().ShowNoResultStateInfo());
             Platform.runLater(()->MainFormController.GetInstance().EnableButtons());
             Platform.runLater(()->MainFormController.GetInstance().EnableTabs());
@@ -482,6 +484,8 @@ public class Search extends Thread{
         //</editor-fold>
         
         for(int CurrentNodeKey: NodeSolMap.keySet()){
+            if(NodeSolMap.get(CurrentNodeKey) == null)
+                continue;
             for(int SolIdx = 0; SolIdx < NodeSolMap.get(CurrentNodeKey).size(); SolIdx++){
                 NodeSolMap.get(CurrentNodeKey).get(SolIdx).UpdateAvgFragYield();
             }
@@ -501,10 +505,7 @@ public class Search extends Thread{
         MainFormController.GetInstance().SetNodeSolMap(NodeSolMap);
         MainFormController.GetInstance().SetLibBBLList(LibBBLList);
         MainFormController.GetInstance().ShowSolResult();
-//        MainFormController.GetInstance().ShowFinishedStateInfo();
-//        Platform.runLater(()->MainFormController.GetInstance().SetNodeSolMap(NodeSolMap));
-//        Platform.runLater(()->MainFormController.GetInstance().SetLibBBLList(LibBBLList));
-//        Platform.runLater(()->MainFormController.GetInstance().ShowSolResult());
+
         Platform.runLater(()->MainFormController.GetInstance().ShowFinishedStateInfo());
         Platform.runLater(()->MainFormController.GetInstance().EnableButtons());
         Platform.runLater(()->MainFormController.GetInstance().EnableTabs());
