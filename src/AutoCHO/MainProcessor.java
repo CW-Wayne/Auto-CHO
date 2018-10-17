@@ -58,7 +58,7 @@ public class MainProcessor {
     }
     public MainProcessor(){
         try{
-            this.GBF = new OptGlycanBuilder();
+            //this.GBF = new OptGlycanBuilder();
             this.InitializeSearchParameters();
         }
         catch(Exception e){
@@ -116,22 +116,12 @@ public class MainProcessor {
     private Image InitializeTargetStructure() throws Exception{
         //Globo-H
         String synthesisTarget = "RES\n1b:b-dglc-HEX-1:5\n2b:b-dgal-HEX-1:5\n3b:a-dgal-HEX-1:5\n4b:b-dgal-HEX-1:5\n5s:n-acetyl\n6b:b-dgal-HEX-1:5\n7b:a-lgal-HEX-1:5|6:d\nLIN\n1:1o(4+1)2d\n2:2o(4+1)3d\n3:3o(3+1)4d\n4:4d(2+1)5n\n5:4o(3+1)6d\n6:6o(2+1)7d\n";
-        
-        GlycoCTCondensedParser parser = new GlycoCTCondensedParser(false);
-        MassOptions options = MassOptions.empty();
-        Glycan glycan = parser.readGlycan(synthesisTarget, options);
-        List<Glycan> gList = new ArrayList<>();
-        gList.add(glycan);
-        
-        BuilderWorkspace ws = new BuilderWorkspace(new GlycanRendererAWT());
-        GlycanDocument gd = new GlycanDocument(ws);
-        gd.addStructures(gList);
-        
+         
+        GlycanDocument gd = GBF.getCanvas().getDocument();
+        gd.fromString(synthesisTarget, "glycoct_condensed");
         GBF.getCanvas().getViewMenu().getItem(2).setSelected(true);
         GBF.getCanvas().setNotation("cfg"); //See GraphicOptions.java
         //GBF.getCanvas().getNotation("text");
-        GBF.getCanvas().setDocument(gd);
-        
         return DrawTargetGlycan();
     }
     
@@ -166,21 +156,8 @@ public class MainProcessor {
     }
     
     public Image DrawTargetGlycan(String synthesisTarget) throws Exception{
-        GlycoCTCondensedParser parser = new GlycoCTCondensedParser(false);
-        MassOptions options = MassOptions.empty();
-        Glycan glycan = parser.readGlycan(synthesisTarget, options);
-        List<Glycan> gList = new ArrayList<>();
-        gList.add(glycan);
-        
-        BuilderWorkspace ws = new BuilderWorkspace(new GlycanRendererAWT());
-        GlycanDocument gd = new GlycanDocument(ws);
-        gd.addStructures(gList);
-        
-        //GBF.getCanvas().getViewMenu().getItem(2).setSelected(true);
-        //GBF.getCanvas().setNotation("cfg"); //See GraphicOptions.java
-        //GBF.getCanvas().getNotation("text");
-        GBF.getCanvas().setDocument(gd);
-        
+        GlycanDocument gd = GBF.getCanvas().getDocument();
+        gd.fromString(synthesisTarget, "glycoct_condensed");
         return DrawTargetGlycan();
     }
     
@@ -188,9 +165,6 @@ public class MainProcessor {
         List<Glycan> GlycanList = GBF.getCanvas().getDocument().getStructures();
         BufferedImage bi = GBF.getCanvas().getGlycanRenderer().getImage(GlycanList, false, false, true);
         Image image = SwingFXUtils.toFXImage(bi, null);
-        //ImageIcon icon = new ImageIcon();
-        //icon.setImage(bi);
-        //JOptionPane.showMessageDialog(null, icon);
         return image;
     }
     

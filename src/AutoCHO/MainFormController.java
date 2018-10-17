@@ -400,8 +400,7 @@ public class MainFormController implements Initializable {
     }
     public void StartGlycanBuilder() throws Exception{
         MainProcessor.GetInstance().HasMainFormBeenRun = true;
-        Image image = MainProcessor.GetInstance().StartGlycanBuilder();
-        //DrawTargetGlycan(image);
+        MainProcessor.GetInstance().StartGlycanBuilder();
     }
     public void DrawTargetGlycan(Image image){
         ImageTargetStructure.setFitWidth(image.getWidth());
