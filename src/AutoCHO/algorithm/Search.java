@@ -1235,7 +1235,7 @@ public class Search extends Thread{
                         for(int fragIdx = 0; fragIdx < FragListSize; fragIdx++){
                             DS_Fragment fragment = NodeSolMap.get(ID).get(m).FragList.get(fragIdx);
                             text.append("\tFragment " + (fragIdx + 1) + "[Fragment Yield=");
-                            text.append(String.format("%.2f", fragment.Yield * 100));
+                            text.append(String.format("%.0f", fragment.Yield * 100));
                             text.append("%]");
                             /*
                             text.append("[");
