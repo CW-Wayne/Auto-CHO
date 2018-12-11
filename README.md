@@ -15,4 +15,4 @@ Minimum screen resolution: 1024x768.<br>
 Recommended screen resolution: 1920x1080 or higher.<br>
 
 <b>Reference</b><br>
-Cheng-Wei Cheng, Yixuan Zhou, Wen-Harn Pan, Supriya Dey, Chung-Yi Wu, Wen-Lian Hsu, and Chi-Huey Wong, "Hierarchical and Programmable One-pot Synthesis of Oligosaccharides", 2018 (Submitted).
+Cheng-Wei Cheng, Yixuan Zhou, Wen-Harn Pan, Supriya Dey, Chung-Yi Wu, Wen-Lian Hsu, and Chi-Huey Wong, "Hierarchical and Programmable One-pot Synthesis of Oligosaccharides", Nature Communications, 2018.
