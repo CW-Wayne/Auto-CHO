@@ -133,7 +133,7 @@
                                                                            <font>
                                                                               <Font size="14.0" />
                                                                            </font></Label>
-                                                                        <Label text="Cheng-Wei Cheng, Yixuan Zhou, Wen-Harn Pan, Supriya Dey, &#10;Chung-Yi Wu, Wen-Lian Hsu, and Chi-Huey Wong, &#10;&quot;Hierarchical and Programmable One-pot Synthesis of Oligosaccharides&quot;, &#10;2018 (Submitted)." GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                                                                        <Label text="Cheng-Wei Cheng, Yixuan Zhou, Wen-Harn Pan, Supriya Dey, &#10;Chung-Yi Wu, Wen-Lian Hsu, and Chi-Huey Wong, &#10;&quot;Hierarchical and Programmable One-pot Synthesis of Oligosaccharides&quot;,&#10;Nature Communications, 2018." GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.valignment="TOP">
                                                                            <font>
                                                                               <Font size="14.0" />
                                                                            </font></Label>
